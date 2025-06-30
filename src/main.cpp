@@ -1,38 +1,49 @@
 #include <iostream>
-#include "Paciente.h"
-#include "crow.h"
+#include "Paciente.hpp"
+#include "Prontuario.hpp"
+#include "Pessoa.hpp"
+#include "Documentos.hpp"
+#include "Medico.hpp"
+#include "Consulta.hpp"
+#include "Agenda.hpp"
 
 using namespace std;
 
-int main(){
+int main() {
+    // Create a prontuario for a patient
+    Paciente paciente("Maria Oliveira", 28, "123.456.789-01", "15/03/1995", "Feminino", "(11) 98765-4321");
+    Prontuario prontuario(&paciente);
 
-    /*
-        Ordem dos parâmetros:
+    // Create a doctor
+    Medico medico("Dr. Carlos Pereira", 40, "987.654.321-01", "20/07/1983", "Masculino", "(11) 12345-6789", "CRM987654", "Neurologia");
 
-            - Nome;
-            - Idade;
-            - CPF;
-            - Celular;
-            - Email;
-            - Data de Nascimento;
-            - Gênero;
-            - Diagnósticos.
-    */
+    // Create medical documents
+    Evolucao evolucao("10/10/2023", &medico, "Paciente apresenta sintomas de enxaqueca.");
+    Atestado atestado("10/10/2023", &medico, 3, "Enxaqueca aguda.");
+    vector<string> medicamentos = {"Dipirona 500mg", "Aspirina 100mg"};
+    Receita receita("10/10/2023", &medico, medicamentos);
+    Receita receita2("10/10/2323", &medico, medicamentos);
+    Receita receita3("10/10/2323", &medico, medicamentos);
 
-    crow::SimpleApp app;
+    // Add documents to the prontuario
+    paciente.getProntuario()->adicionarEvolucao(evolucao);
+    paciente.getProntuario()->adicionarAtestado(atestado);
+    paciente.getProntuario()->adicionarReceita(receita);
+    paciente.getProntuario()->adicionarReceita(receita2);
+    paciente.getProntuario()->adicionarReceita(receita3);
 
-    CROW_ROUTE(app, "/")([](){
-        return "Hello, API!";
-    });
+    // Display the patient's medical record summary
+    cout << "Resumo do Prontuário de " << paciente.getNome() << ":"<< endl;
+    paciente.getProntuario()->exibirHistorico();
 
-    CROW_ROUTE(app, "/hello/<string>")([](std::string name){
-        return "Ola, " + name + "!";
-    });
+    // Create a consultation
+    Consulta consulta(&paciente, &medico, "10/10/2023 14:00");
+    consulta.exibir();
+    // Create an agenda and add the consultation
+    Agenda agenda;
+    agenda.adicionarConsulta(consulta);
+    cout << "Agenda de Consultas:" << endl;
+    agenda.exibir();
 
-    app.port(18080).multithreaded().run();
-
-    cout << "Olá, mundo!" << endl;
-    Paciente Lucas("Lucas", 18, "08937100592", "77991670521", "lukasbritoamaral007@gmail.com", "09/07/2006", "Masculino", {"Hipotireoidismo", "Nanismo"});
-
-    return 0;
+  return 0;
 }
