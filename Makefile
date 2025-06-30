@@ -1,42 +1,56 @@
-# Compilador
-CXX := g++
+# Compilador C++
+CXX = g++
 
-# Diretórios
-SRC_DIR := src
-INC_DIR := include
-BUILD_DIR := build
-BIN_DIR := bin
+# Flags do compilador: -std=c++17 para usar recursos modernos, -g para debug, -Wall para avisos
+CXXFLAGS = -std=c++17 -g -Wall
 
-# Arquivo final
-TARGET := $(BIN_DIR)/app
+# Diretório de includes
+INCLUDES = -Iinclude
 
-# Flags
-CXXFLAGS := -std=c++23 -Wall -Wextra -I$(INC_DIR)
+# Diretório de fontes
+SRCDIR = src
 
-# Bibliotecas necessárias para Crow
-LDFLAGS := -lpthread
+# Diretório de build (onde os arquivos compilados irão parar)
+BUILDDIR = build
 
-# Coleta todos os .cpp de src/
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+# Nome do executável final
+EXECUTABLE = $(BUILDDIR)/clinica
 
-# Cria os .o correspondentes em build/
-OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
-# Regra principal
-all: $(TARGET)
+# --- Detecção Automática de Arquivos ---
 
-# Linkagem final
-$(TARGET): $(OBJS)
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+# Encontra todos os arquivos .cpp dentro de src e suas subpastas
+SOURCES := $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp)
 
-# Compilação dos .cpp para .o
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS)
+# Gera os nomes dos arquivos objeto (.o) que serão criados no diretório de build
+OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
-# Limpeza dos binários e objetos
+
+# --- Regras do Makefile ---
+
+# A regra padrão, que é executada quando você digita apenas "make"
+# Depende do executável final.
+all: $(EXECUTABLE)
+
+# Regra para linkar todos os arquivos objeto (.o) e criar o executável final
+$(EXECUTABLE): $(OBJECTS)
+	@mkdir -p $(@D) # Cria o diretório de build se ele não existir
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+# Regra para compilar cada arquivo .cpp em um arquivo .o
+# Compila fontes de $(SRCDIR) para objetos em $(BUILDDIR)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	@mkdir -p $(@D) # Cria os subdiretórios em build se necessário
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+# Regra para limpar os arquivos gerados
 clean:
-	rm -rf $(BUILD_DIR)/*.o $(TARGET)
+	@echo "Limpando arquivos de build..."
+	@rm -rf $(BUILDDIR)
 
-.PHONY: all clean
+# compilar e executar o programa de uma só vez
+run: all
+	@echo "Executando o programa..."
+	@./$(EXECUTABLE)
+
+.PHONY: all clean run
