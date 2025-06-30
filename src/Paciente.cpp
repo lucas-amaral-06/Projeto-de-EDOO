@@ -1,26 +1,22 @@
-#include "Paciente.h"
-#include <vector>
-#include <string>
+#include "Paciente.hpp"
+#include "Prontuario.hpp"
+#include <iostream>
+using namespace std;
 
-// Método construtor da classe.
+Paciente::Paciente(const string& nome, const int& idade, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone)
+    : Pessoa(nome, idade, cpf, dataNascimento, genero, telefone), prontuario(new Prontuario(this)) // Inicializa o prontuário com o paciente
+{}
 
-Paciente::Paciente(const std::string& nome, 
-                   uint8_t idade, 
-                   const std::string& cpf, 
-                   const std::string& celular, 
-                   const std::string& email,
-                   const std::string& data_nascimento,
-                   const std::string& genero,
-                   const std::vector<std::string>& diagnosticos){
+Paciente::~Paciente() {
+  delete prontuario; // Libera a memória do prontuário
+}
 
-    //Inicializando os atributos do objeto.
+Prontuario* Paciente::getProntuario() const {
+  return prontuario; // Retorna o prontuário do paciente
+}
 
-    this->nome = nome;
-    this->idade = idade;
-    this->cpf = cpf;
-    this->celular = celular;
-    this->email = email;
-    this->data_nascimento = data_nascimento;
-    this->genero = genero;
-    this->diagnosticos = diagnosticos;
+void Paciente::exibirDados() const {
+  cout << "Dados do Paciente:" << this->getNome() << endl;
+  Pessoa::exibirDados();
+  cout << "Nº Prontuário: " << prontuario->getNumero() << endl;
 }
