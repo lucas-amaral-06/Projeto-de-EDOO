@@ -1,0 +1,67 @@
+#include "ui/Auth.hpp"
+#include <iostream>
+using namespace std;
+
+namespace Auth {
+  void registrarPaciente(vector<Paciente>& pacienteDB){
+    string nome, cpf, dataNascimento, genero, telefone;
+
+    cout << "\n--- Cadastro de Novo Paciente ---" << endl;
+    cout << "Digite o nome completo do paciente: ";
+    getline(cin, nome);
+
+    cout << "Digite o CPF do paciente (XXX.XXX.XXX-XX): ";
+    getline(cin, cpf);
+
+    cout << "Digite a data de nascimento do paciente (DD/MM/AAAA): ";
+    getline(cin, dataNascimento);
+
+    cout << "Digite o gênero do paciente: ";
+    getline(cin, genero);
+
+    cout << "Digite o telefone do paciente (formato: (XX) XXXXX-XXXX): ";
+    getline(cin, telefone);
+
+    try {
+      pacienteDB.emplace_back(nome, cpf, dataNascimento, genero, telefone); // emplace_back cria um novo objeto Paciente diretamente no vetor
+      cout << "\nSUCESSO: Paciente " << nome << " cadastrado com sucesso!" << endl;
+    } catch (const exception& e) {
+      cerr << "\nERRO: " << e.what() << endl;
+      cerr << "Falha ao cadastrar o paciente. Verifique os dados informados." << endl;
+    }
+  }
+
+  void registrarMedico(vector<Medico>& medicoDB){
+    string nome, cpf, dataNascimento, genero, telefone, crm, especialidade;
+
+    cout << "\n--- Cadastro de Novo Médico ---" << endl;
+    cout << "Digite o nome completo do médico: ";
+    getline(cin, nome);
+
+    cout << "Digite o CPF do médico (XXX.XXX.XXX-XX): ";
+    getline(cin, cpf);
+
+    cout << "Digite a data de nascimento do médico (DD/MM/AAAA): ";
+    getline(cin, dataNascimento);
+
+    cout << "Digite o gênero do médico: ";
+    getline(cin, genero);
+
+    cout << "Digite o telefone do médico (formato: (XX) XXXXX-XXXX): ";
+    getline(cin, telefone);
+
+    cout << "Digite o CRM do médico: ";
+    getline(cin, crm);
+
+    cout << "Digite a especialidade do médico: ";
+    getline(cin, especialidade);
+
+    try {
+      medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade); // emplace_back cria um novo objeto médico diretamente no vetor
+      cout << "\nSUCESSO: Med " << nome << " cadastrado com sucesso!" << endl;
+    } catch (const exception& e) {
+      cerr << "\nERRO: " << e.what() << endl;
+      cerr << "Falha ao cadastrar o médico. Verifique os dados informados." << endl;
+    }
+  }
+}

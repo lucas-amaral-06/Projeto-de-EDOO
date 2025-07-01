@@ -1,49 +1,103 @@
 #include <iostream>
-#include "Paciente.hpp"
-#include "Prontuario.hpp"
-#include "Pessoa.hpp"
-#include "Documentos.hpp"
-#include "Medico.hpp"
-#include "Consulta.hpp"
-#include "Agenda.hpp"
+#include <vector>
+#include "ui/Menu.hpp"
+#include "ui/Auth.hpp"
+#include "ui/Listagens.hpp"
+#include "db/InMemoryDB.hpp"
 
 using namespace std;
 
+void login(InMemoryDB& db) {
+  cout << "\n--- Login no Sistema ---" << endl;
+  cout << "Digite seu CPF (ex: XXX.XXX.XXX-XX): ";
+  string cpf;
+  getline(cin, cpf);
+
+  Paciente* pacienteLogin = db.buscarPacientePorCPF(cpf);
+  
+  if(pacienteLogin) {
+    cout << "\nLogin realizado com sucesso! Bem vindo(a), " << pacienteLogin->getNome() << "!" << endl;
+  } else {
+    cout << "\nERRO: Paciente com CPF " << cpf << " não encontrado."<< endl;
+  }
+
+  cout << "Pressione Enter para continuar..." << endl;
+  cin.get();
+}
+
+void fluxoDeListagens(InMemoryDB& db) {
+  int escolha = MenuUI::exibirMenuListagens();
+
+  switch (escolha) {
+    case 1:
+      ListagensUI::listarPacientes(db);
+      break;
+    case 2:
+      ListagensUI::listarMedicos(db);
+      break;
+    case 3:
+      break;
+  }
+
+  if(escolha != 3) {
+    cout << "Pressione Enter para continuar..." << endl;
+    cin.get();
+  }
+}
+
+void fluxoDeRegistro(InMemoryDB& db) {
+  int escolha = MenuUI::exibirMenuRegistro();
+
+  switch (escolha){
+    case 1:
+      Auth::registrarPaciente(db.pacientesDB);
+      break;
+    case 2:
+      Auth::registrarMedico(db.medicosDB);  
+      break;
+    case 3:
+      cout << "Retornando ao menu inicial..." << endl;
+      break;
+  }
+
+  if(escolha != 3) {
+    cout << "Pressione Enter para continuar..." << endl;
+    cin.get();
+  }
+}
+
 int main() {
-    // Create a prontuario for a patient
-    Paciente paciente("Maria Oliveira", 28, "123.456.789-01", "15/03/1995", "Feminino", "(11) 98765-4321");
-    Prontuario prontuario(&paciente);
+  InMemoryDB db; // Inicializa o banco de dados em memória
 
-    // Create a doctor
-    Medico medico("Dr. Carlos Pereira", 40, "987.654.321-01", "20/07/1983", "Masculino", "(11) 12345-6789", "CRM987654", "Neurologia");
+  cout << "Banco de dados inicializado com " << db.pacientesDB.size() << " pacientes e " << db.medicosDB.size() << " médicos." << endl;
+  cout << "Pressione Enter para continuar..." << endl;
+  cin.get();
 
-    // Create medical documents
-    Evolucao evolucao("10/10/2023", &medico, "Paciente apresenta sintomas de enxaqueca.");
-    Atestado atestado("10/10/2023", &medico, 3, "Enxaqueca aguda.");
-    vector<string> medicamentos = {"Dipirona 500mg", "Aspirina 100mg"};
-    Receita receita("10/10/2023", &medico, medicamentos);
-    Receita receita2("10/10/2323", &medico, medicamentos);
-    Receita receita3("10/10/2323", &medico, medicamentos);
+  bool executando = true;
+  while (executando){
+    #ifdef _WIN32
+      system('cls');
+    #else
+      system("clear");
+    #endif
 
-    // Add documents to the prontuario
-    paciente.getProntuario()->adicionarEvolucao(evolucao);
-    paciente.getProntuario()->adicionarAtestado(atestado);
-    paciente.getProntuario()->adicionarReceita(receita);
-    paciente.getProntuario()->adicionarReceita(receita2);
-    paciente.getProntuario()->adicionarReceita(receita3);
+    int escolha = MenuUI::exibirMenuInicial();
 
-    // Display the patient's medical record summary
-    cout << "Resumo do Prontuário de " << paciente.getNome() << ":"<< endl;
-    paciente.getProntuario()->exibirHistorico();
-
-    // Create a consultation
-    Consulta consulta(&paciente, &medico, "10/10/2023 14:00");
-    consulta.exibir();
-    // Create an agenda and add the consultation
-    Agenda agenda;
-    agenda.adicionarConsulta(consulta);
-    cout << "Agenda de Consultas:" << endl;
-    agenda.exibir();
-
+    switch (escolha) {
+      case 1:
+        login(db);
+        break;
+      case 2:
+        fluxoDeRegistro(db);
+        break;
+      case 3:
+        fluxoDeListagens(db);
+        break;
+      case 4:
+        cout << "\nObrigado por usar o SysMed C++. Até logo!" << endl;
+        executando = false;
+        break;
+    }
+  }
   return 0;
 }
