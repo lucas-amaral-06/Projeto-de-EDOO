@@ -15,7 +15,7 @@ class Pessoa
     string telefone;
 
   public:
-    Pessoa(const string& nome, const int& idade, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone);
+    Pessoa(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone);
 
     virtual ~Pessoa();
 

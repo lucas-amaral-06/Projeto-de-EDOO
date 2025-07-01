@@ -10,7 +10,7 @@ class Medico : public Pessoa
     string especialidade;
 
   public:
-    Medico(const string& nome, const int& idade, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& crm, const string& especialidade);
+    Medico(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& crm, const string& especialidade);
 
     ~Medico() override;
 
