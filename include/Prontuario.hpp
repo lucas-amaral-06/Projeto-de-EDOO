@@ -22,7 +22,7 @@ class Prontuario
     vector<Atestado> listaAtestados;
 
   public:
-    Prontuario(Paciente* paciente); // construtor que recebe um ponteiro para o paciente
+    Prontuario(Paciente& paciente); // construtor que recebe um ponteiro para o paciente
 
     Prontuario(); // construtor padrão
 
