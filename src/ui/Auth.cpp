@@ -1,5 +1,5 @@
 #include "ui/Auth.hpp"
-#include "utils/utils.hpp" // Inclui nossas funções de validação
+#include "utils.hpp" // Inclui nossas funções de validação
 #include <iostream>
 #include "Paciente.hpp"
 #include "Recepcionista.hpp"
@@ -47,7 +47,7 @@ namespace Auth
         while (true) {
             cout << "Digite o CPF (XXX.XXX.XXX-XX): ";
             getline(cin, cpf);
-            if (validarFormatoCPF(cpf)) {
+            if (validarCPF(cpf)) {
                 break; // Sai do loop se o CPF for válido
             }
         }
@@ -93,7 +93,7 @@ namespace Auth
         while (true) {
             cout << "Digite o CPF do médico (XXX.XXX.XXX-XX): ";
             getline(cin, cpf);
-            if (validarFormatoCPF(cpf)) {
+            if (validarCPF(cpf)) {
                 break;
             }
         }

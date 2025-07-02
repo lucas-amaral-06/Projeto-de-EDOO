@@ -1,10 +1,8 @@
-
-
 # Compilador C++
 CXX = g++
 
 # Flags do compilador
-CXXFLAGS = -std=c++17 -g -Wall
+CXXFLAGS = -std=c++23 -g -Wall
 
 # Diretório de includes
 INCLUDES = -Iinclude
@@ -22,29 +20,37 @@ EXECUTABLE = $(BUILDDIR)/clinica.exe
 SOURCES := $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp)
 OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
-# --- Regras do Makefile ---
+# Detecta sistema operacional
+ifeq ($(OS),Windows_NT)
+    RM = rmdir /S /Q
+    MKDIR = if not exist "$(subst /,\,$(1))" mkdir "$(subst /,\,$(1))"
+    EXE_EXT = .exe
+    RUN = cmd /c "$(subst /,\,$(EXECUTABLE))"
+else
+    RM = rm -rf
+    MKDIR = mkdir -p $(1)
+    EXE_EXT =
+    RUN = ./$(EXECUTABLE)
+endif
+
 .PHONY: all clean run
 
-# A regra padrão
 all: $(EXECUTABLE)
 
-# Regra para linkar os arquivos e criar o executável
 $(EXECUTABLE): $(OBJECTS)
-	@echo "--> Linkando para criar o executavel: $@"
+	@echo "--> Linkando para criar o executável: $@"
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Regra para compilar cada arquivo .cpp em um .o
+# Compilar cada arquivo .cpp em um .o
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	@echo "--> Compilando: $<"
-	@mkdir "$(subst /,\,$(@D))" 2>nul || echo.
+	$(call MKDIR,$(@D))
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-# Regra para limpar os arquivos gerados
 clean:
 	@echo "Limpando arquivos de build..."
-	-rmdir /S /Q "$(subst /,\,$(BUILDDIR))" 2>nul || echo.
+	$(RM) "$(subst /,\,$(BUILDDIR))"
 
-# Regra para compilar e executar
 run: all
 	@echo "Executando o programa..."
-	@"$(subst /,\,$(EXECUTABLE))"
+	$(RUN)
