@@ -23,7 +23,6 @@ void Medico::setEspecialidade(const string& especialidade) {
 }
 
 void Medico::exibirDados() const {
-  cout << "Dados do Médico:" << this->getNome() << endl;
   Pessoa::exibirDados();
   cout << "CRM: " << crm << endl;
   cout << "Especialidade: " << this->especialidade << endl;

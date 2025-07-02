@@ -30,21 +30,22 @@ void login(InMemoryDB& db) {
 }
 
 void fluxoDeListagens(InMemoryDB& db) {
+
   int escolha = MenuUI::exibirMenuListagens();
 
   switch (escolha) {
     case 1:
-      ListagensUI::listarPacientes(db);
+      ListagensUI::listarMedicos(db);
       break;
     case 2:
-      ListagensUI::listarMedicos(db);
+      ListagensUI::listarRecepcionistas(db);
       break;
     case 3:
       break;
   }
 
   if(escolha != 3) {
-    cout << "Pressione Enter para continuar..." << endl;
+    cout << "Pressione Enter para continuar... ";
     cin.get();
   }
 }

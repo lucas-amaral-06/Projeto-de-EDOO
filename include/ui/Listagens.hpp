@@ -8,7 +8,7 @@ namespace ListagensUI {
   void listarMedicos(const InMemoryDB& db);
 
   // @brief Itera sobre o banco de dados e exibe os detalhes dos pacientes.
-  void listarPacientes(const InMemoryDB& db);
+  void listarRecepcionistas(const InMemoryDB& db);
 }
 
 #endif
