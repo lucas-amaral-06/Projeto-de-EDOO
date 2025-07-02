@@ -16,6 +16,8 @@ inline void clearScreen() {
     #endif
 }
 
-bool validarFormatoCPF(const string& cpf);
+bool validarCPF(const string& cpf);
+bool validarData(const string& data);
+bool validarCRM(const string& crm);
 
 #endif

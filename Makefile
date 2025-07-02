@@ -1,8 +1,10 @@
+
+
 # Compilador C++
 CXX = g++
 
-# Flags do compilador: -std=c++23 para usar recursos modernos, -g para debug, -Wall para avisos
-CXXFLAGS = -std=c++23 -g -Wall
+# Flags do compilador
+CXXFLAGS = -std=c++17 -g -Wall
 
 # Diretório de includes
 INCLUDES = -Iinclude
@@ -10,47 +12,39 @@ INCLUDES = -Iinclude
 # Diretório de fontes
 SRCDIR = src
 
-# Diretório de build (onde os arquivos compilados irão parar)
+# Diretório de build
 BUILDDIR = build
 
 # Nome do executável final
-EXECUTABLE = $(BUILDDIR)/clinica
-
+EXECUTABLE = $(BUILDDIR)/clinica.exe
 
 # --- Detecção Automática de Arquivos ---
-
-# Encontra todos os arquivos .cpp dentro de src e suas subpastas
 SOURCES := $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp)
-
-# Gera os nomes dos arquivos objeto (.o) que serão criados no diretório de build
 OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
-
 # --- Regras do Makefile ---
+.PHONY: all clean run
 
-# A regra padrão, que é executada quando você digita apenas "make"
-# Depende do executável final.
+# A regra padrão
 all: $(EXECUTABLE)
 
-# Regra para linkar todos os arquivos objeto (.o) e criar o executável final
+# Regra para linkar os arquivos e criar o executável
 $(EXECUTABLE): $(OBJECTS)
-	@mkdir -p $(@D) # Cria o diretório de build se ele não existir
+	@echo "--> Linkando para criar o executavel: $@"
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Regra para compilar cada arquivo .cpp em um arquivo .o
-# Compila fontes de $(SRCDIR) para objetos em $(BUILDDIR)
+# Regra para compilar cada arquivo .cpp em um .o
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(@D) # Cria os subdiretórios em build se necessário
+	@echo "--> Compilando: $<"
+	@mkdir "$(subst /,\,$(@D))" 2>nul || echo.
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 # Regra para limpar os arquivos gerados
 clean:
 	@echo "Limpando arquivos de build..."
-	@rm -rf $(BUILDDIR)
+	-rmdir /S /Q "$(subst /,\,$(BUILDDIR))" 2>nul || echo.
 
-# compilar e executar o programa de uma só vez
+# Regra para compilar e executar
 run: all
 	@echo "Executando o programa..."
-	@./$(EXECUTABLE)
-
-.PHONY: all clean run
+	@"$(subst /,\,$(EXECUTABLE))"

@@ -133,9 +133,41 @@ namespace MenuUI {
       }
     }
 
+    // AQUI ESTÁ A FUNÇÃO CORRIGIDA
     int exibirMenuRegistro() {
+      int escolha = 0;
 
+      while (true) {
+        clearScreen();
+        exibirBanner();
+        
+        cout << "\n--- MENU DE REGISTRO ---\n\n";
+        cout << "O que você deseja registrar?\n";
+        cout << "1. Novo Recepcionista" << endl;
+        cout << "2. Novo Médico" << endl;
+        cout << "3. Voltar ao menu anterior\n\n";
+        cout << "Sua escolha: ";
 
+        cin >> escolha;
+
+        if (cin.fail()) {
+            cout << "\nERRO: Por favor, digite apenas números." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            cout << "Pressione Enter para tentar novamente...";
+            cin.get();
+        } else {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            if (escolha >= 1 && escolha <= 3) {
+                return escolha;
+            } else {
+                cout << "\nERRO: Opção inválida. Escolha entre 1 e 3." << endl;
+                cout << "Pressione Enter para tentar novamente...";
+                cin.get();
+            }
+        }
+      }
     }
 
     int exibirMenuLogin() {
