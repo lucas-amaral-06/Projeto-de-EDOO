@@ -98,7 +98,7 @@ int main() {
         fluxoDeListagens(db);
         break;
       case 4:
-        cout << "\nObrigado por usar o SysMed C++. Até logo!" << endl;
+        cout << "\nObrigado por usar o SysMed++. Até logo!" << endl;
         executando = false;
         break;
     }

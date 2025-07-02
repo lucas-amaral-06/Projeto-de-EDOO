@@ -9,7 +9,7 @@ namespace MenuUI {
     void exibirBanner(){
         cout << "=================================================" << endl;
         cout << "||                                             ||" << endl;
-        cout << "||              CLÍNICA SAÚDE++                ||" << endl;
+        cout << "||              SysMed++                       ||" << endl;
         cout << "||        Sistema de Atendimento Médico        ||" << endl;
         cout << "||                                             ||" << endl;
         cout << "=================================================" << endl;
