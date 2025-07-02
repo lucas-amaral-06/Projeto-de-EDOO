@@ -4,6 +4,7 @@
 #include <vector>
 #include "Paciente.hpp"
 #include "Medico.hpp"
+#include "Recepcionista.hpp"
 using namespace std;
 
 namespace Auth {
@@ -12,6 +13,8 @@ namespace Auth {
   
   // Função para registrar médicos, passamos a referência do vetor que atua como nosso DB inline para modificá-lo
   void registrarMedico(vector<Medico>& db);
+
+  void registrarRecepcionista(vector<Recepcionista>& db); 
 }
 
 #endif

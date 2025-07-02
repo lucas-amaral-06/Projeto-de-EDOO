@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-bool validarFormatoCPF(const string& cpf) {
+bool validarCPF(const string& cpf) {
     // Verifica o tamanho da string
     if (cpf.length() != 14) {
         return false;
@@ -23,5 +23,23 @@ bool validarFormatoCPF(const string& cpf) {
         }
     }
 
+    return true;
+}
+
+bool validarData(const std::string& data) {
+    // Implementação da validação de data
+    if (data.length() != 10 || data[2] != '/' || data[5] != '/') {
+        std::cout << "\nERRO: Formato de data inválido. Use DD/MM/AAAA." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool validarCRM(const std::string& crm) {
+    // Implementação da validação de CRM
+    if (crm.rfind("CRM/", 0) != 0) {
+        std::cout << "\nERRO: Formato de CRM inválido. Deve iniciar com 'CRM/'." << std::endl;
+        return false;
+    }
     return true;
 }

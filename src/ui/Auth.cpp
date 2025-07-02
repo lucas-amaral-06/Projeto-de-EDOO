@@ -2,8 +2,10 @@
 #include <iostream>
 using namespace std;
 
-namespace Auth {
-  void registrarPaciente(vector<Paciente>& pacienteDB){
+namespace Auth
+{
+  void registrarPaciente(vector<Paciente> &pacienteDB)
+  {
     string nome, cpf, dataNascimento, genero, telefone;
 
     cout << "\n--- Cadastro de Novo Paciente ---" << endl;
@@ -22,16 +24,61 @@ namespace Auth {
     cout << "Digite o telefone do paciente (formato: (XX) XXXXX-XXXX): ";
     getline(cin, telefone);
 
-    try {
+    try
+    {
       pacienteDB.emplace_back(nome, cpf, dataNascimento, genero, telefone); // emplace_back cria um novo objeto Paciente diretamente no vetor
       cout << "\nSUCESSO: Paciente " << nome << " cadastrado com sucesso!" << endl;
-    } catch (const exception& e) {
+    }
+    catch (const exception &e)
+    {
       cerr << "\nERRO: " << e.what() << endl;
       cerr << "Falha ao cadastrar o paciente. Verifique os dados informados." << endl;
     }
   }
 
-  void registrarMedico(vector<Medico>& medicoDB){
+  void registrarRecepcionista(vector<Recepcionista>& recepcionistaDB)
+  {
+    string nome, cpf, dataNascimento, genero, telefone, senha, turno, codigoAcesso;
+
+    cout << "\n--- Cadastro de Novo(a) Recepcionista ---" << endl;
+    cout << "Digite o nome completo: ";
+    getline(cin, nome);
+
+    cout << "Digite o CPF (XXX.XXX.XXX-XX): ";
+    getline(cin, cpf);
+
+    cout << "Digite a data de nascimento (DD/MM/AAAA): ";
+    getline(cin, dataNascimento);
+
+    cout << "Digite o gênero: ";
+    getline(cin, genero);
+
+    cout << "Digite o telefone (XX) XXXXX-XXXX: ";
+    getline(cin, telefone);
+
+    cout << "Crie uma senha de acesso: ";
+    getline(cin, senha);
+
+    cout << "Digite o turno de trabalho (Manhã, Tarde, Noite): ";
+    getline(cin, turno);
+
+    cout << "Digite o código de acesso (ex: REC004): ";
+    getline(cin, codigoAcesso);
+
+    try
+    {
+      recepcionistaDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, senha, turno, codigoAcesso);
+      cout << "\nSUCESSO: Recepcionista " << nome << " cadastrado(a) com sucesso!" << endl;
+    }
+    catch (const exception &e)
+    {
+      cerr << "\nERRO: " << e.what() << endl;
+      cerr << "Falha ao cadastrar o(a) recepcionista. Verifique os dados informados." << endl;
+    }
+  }
+
+  void registrarMedico(vector<Medico> &medicoDB)
+  {
     string nome, cpf, dataNascimento, genero, telefone, crm, especialidade;
 
     cout << "\n--- Cadastro de Novo Médico ---" << endl;
@@ -56,10 +103,13 @@ namespace Auth {
     cout << "Digite a especialidade do médico: ";
     getline(cin, especialidade);
 
-    try {
+    try
+    {
       medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade); // emplace_back cria um novo objeto médico diretamente no vetor
       cout << "\nSUCESSO: Med " << nome << " cadastrado com sucesso!" << endl;
-    } catch (const exception& e) {
+    }
+    catch (const exception &e)
+    {
       cerr << "\nERRO: " << e.what() << endl;
       cerr << "Falha ao cadastrar o médico. Verifique os dados informados." << endl;
     }
