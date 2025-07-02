@@ -1,9 +1,4 @@
 #include "ui/Menu.hpp"
-#include <iostream>
-#include <limits>
-#include "utils.hpp"
-
-using namespace std;
 
 namespace MenuUI {
     void exibirBanner(){
@@ -141,5 +136,39 @@ namespace MenuUI {
     int exibirMenuRegistro() {
 
 
+    }
+
+    int exibirMenuLogin() {
+        int escolha = 0;
+
+        while (true) {
+            clearScreen();
+            MenuUI::exibirBanner();
+            
+            cout << "\n--- LOGIN NO SISTEMA ---\n\n";
+            cout << "1. Médico" << endl;
+            cout << "2. Recepcionista" << endl;
+            cout << "3. Voltar ao menu anterior\n\n";  // Nova opção adicionada
+            cout << "Sua escolha: ";
+
+            cin >> escolha;
+
+            if (cin.fail()) {
+                cout << "\nERRO: Por favor, digite apenas números." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            } else {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                
+                if (escolha >= 1 and escolha <= 3){
+                    return escolha;
+                } else {
+                    cout << "\nERRO: Opção inválida. Escolha 1, 2 ou 3." << endl;  // Mensagem atualizada
+                }
+            }
+
+            cout << "Pressione Enter para continuar... ";
+            cin.get();
+        }
     }
 }

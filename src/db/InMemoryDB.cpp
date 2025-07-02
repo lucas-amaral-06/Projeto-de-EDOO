@@ -5,7 +5,7 @@
 using namespace std;
 
 InMemoryDB::InMemoryDB() {
-  cout << "Inicializando banco de dados em memória...\n" << endl;
+  cout << "\nInicializando banco de dados em memória...\n" << endl;
 
   // --- CRIANDO MÉDICOS ---
   medicosDB.emplace_back("Ana Souza", "543.123.456-78", "20/02/1980", "Feminino", "(81) 97766-5544", "CRM/PE 12345", "Cardiologia");

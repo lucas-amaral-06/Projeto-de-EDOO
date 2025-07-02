@@ -1,6 +1,12 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
+#include <iostream>
+#include <limits>
+#include "utils.hpp"
+
+using namespace std;
+
 namespace MenuUI {
   // Exibe o banner/logo da aplicação
   void exibirBanner();
@@ -16,6 +22,8 @@ namespace MenuUI {
   // @brief Exibe o menu de listagens
   // @return 1 -> Listar Pacientes, 2 -> Listar Médicos
   int exibirMenuListagens();
+
+  int exibirMenuLogin();
 }
 
 #endif

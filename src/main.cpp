@@ -8,25 +8,87 @@
 
 using namespace std;
 
+void loginRecepcionista(InMemoryDB& db) {
+  while(true) {
+      clearScreen();
+      MenuUI::exibirBanner();
+
+      cout << "\n--- LOGIN RECEPCIONISTA ---\n\n";
+      
+      // Solicitar CPF
+      cout << "Digite seu CPF (XXX.XXX.XXX-XX) ou '0' para voltar: ";
+      string cpf;
+      getline(cin, cpf);
+
+      // Opção para sair
+      if (cpf == "0") {
+          return;
+      //Caso não respeite o formato do CPF, pede novamente
+      } else if (!(validarFormatoCPF(cpf))){
+        cout << "\nERRO: Por favor, respeite o formato do CPF." << endl;
+        cout << "Pressione Enter para continuar... ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      //Caso respeite, verificamos se o CPF está cadastrado
+      } else {
+        // Verificar se o CPF está cadastrado
+        Recepcionista* recepcionistaLogin = db.buscarRecepcionistaPorCPF(cpf);
+        
+        // Se o CPF não está cadastrado
+        if(!recepcionistaLogin) {
+
+          cout << "\nERRO: Recepcionista com CPF " << cpf << " não cadastrado.\n";
+          cout << "Pressione Enter para continuar... ";
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        // Se está cadastrado
+        }else{
+
+          // Solicitar senha
+          cout << "Digite seu código de acesso: ";
+          string codigoAcesso;
+          getline(cin, codigoAcesso);
+
+          // Verificar senha
+          if(recepcionistaLogin->getCodigoAcesso() == codigoAcesso) {
+              cout << "\nLogin realizado com sucesso! Bem-vindo(a), " 
+                    << recepcionistaLogin->getNome() << "!\n";
+              cout << "Turno: " << recepcionistaLogin->getTurno() << "\n\n";
+              
+              // Aqui você implementaria:
+              // menuRecepcionista(*recepcionistaLogin, db);
+              // return;
+              
+              cout << "Pressione Enter para continuar...";
+              cin.ignore();
+              return;
+          } else {
+              cout << "\nERRO: Código de acesso incorreto.\n";
+          }
+
+          cout << "\nPressione Enter para tentar novamente...";
+          cin.ignore();
+          
+        }
+      }
+  }
+}
+
 void login(InMemoryDB& db) {
 
   clearScreen();
-  
-  cout << "\n--- Login no Sistema ---" << endl;
-  cout << "Digite seu CPF (ex: XXX.XXX.XXX-XX): ";
-  string cpf;
-  getline(cin, cpf);
 
-  Paciente* pacienteLogin = db.buscarPacientePorCPF(cpf);
-  
-  if(pacienteLogin) {
-    cout << "\nLogin realizado com sucesso! Bem vindo(a), " << pacienteLogin->getNome() << "!" << endl;
-  } else {
-    cout << "\nERRO: Paciente com CPF " << cpf << " não encontrado."<< endl;
+  int escolha = MenuUI::exibirMenuLogin();
+
+  switch (escolha) {
+    case 1:
+      break;
+    case 2:
+      loginRecepcionista(db);
+      break;
   }
-
-  cout << "Pressione Enter para continuar..." << endl;
-  cin.get();
+  
 }
 
 void fluxoDeListagens(InMemoryDB& db) {
@@ -74,6 +136,7 @@ void fluxoDeRegistro(InMemoryDB& db) {
 int main() {
 
   clearScreen();
+  MenuUI::exibirBanner();
 
   InMemoryDB db; // Inicializa o banco de dados em memória
 
