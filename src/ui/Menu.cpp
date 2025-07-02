@@ -1,6 +1,7 @@
 #include "ui/Menu.hpp"
 #include <iostream>
 #include <limits> // Validação de entrada
+#include "utils.hpp"
 
 using namespace std;
 
@@ -47,11 +48,7 @@ namespace MenuUI {
       cout << "Pressione Enter para continuar";
       cin.get();
 
-      #ifdef _WIN32
-        system("cls");
-      #else
-        system("clear");
-      #endif
+      clearScreen();
 
     }
   }
@@ -60,11 +57,7 @@ namespace MenuUI {
     int escolha = 0;
 
     while (true) {
-      #ifdef _WIN32
-        system("cls");
-      #else
-        system("clear");
-      #endif
+      clearScreen();
 
       cout << "\n--- Menu de Registro ---" << endl;
       cout << "Você deseja registrar um novo:" << endl;
@@ -99,11 +92,7 @@ namespace MenuUI {
     int escolha = 0;
 
     while (true) {
-      #ifdef _WIN32
-        system("cls");
-      #else
-        system("clear");
-      #endif
+      clearScreen();
 
       cout << "\n--- Menu de Visualização ---" << endl;
       cout << "Você deseja listar:" << endl;

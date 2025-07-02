@@ -1,14 +1,14 @@
 #include "Recepcionista.hpp"
 #include <iostream>
 
-Recepcionista::Recepcionista(const std::string& nome, 
-                           const std::string& cpf, 
-                           const std::string& dataNascimento,
-                           const std::string& genero,
-                           const std::string& telefone,
-                           const std::string& senha,
-                           const std::string& turno,
-                           const std::string& codigoAcesso)
+Recepcionista::Recepcionista(const string& nome, 
+                           const string& cpf, 
+                           const string& dataNascimento,
+                           const string& genero,
+                           const string& telefone,
+                           const string& senha,
+                           const string& turno,
+                           const string& codigoAcesso)
     : Pessoa(nome, cpf, dataNascimento, genero, telefone),
       senha(senha),
       turno(turno),
@@ -19,36 +19,36 @@ Recepcionista::~Recepcionista() {
 }
 
 // Getters
-std::string Recepcionista::getSenha() const {
+string Recepcionista::getSenha() const {
     return senha;
 }
 
-std::string Recepcionista::getTurno() const {
+string Recepcionista::getTurno() const {
     return turno;
 }
 
-std::string Recepcionista::getCodigoAcesso() const {
+string Recepcionista::getCodigoAcesso() const {
     return codigoAcesso;
 }
 
 // Setters
-void Recepcionista::setSenha(const std::string& novaSenha) {
+void Recepcionista::setSenha(const string& novaSenha) {
     senha = novaSenha;
 }
 
-void Recepcionista::setTurno(const std::string& novoTurno) {
+void Recepcionista::setTurno(const string& novoTurno) {
     turno = novoTurno;
 }
 
 // Método para exibir todos os dados
 void Recepcionista::exibirDados() const {
-    std::cout << "\n=== Dados do Recepcionista ===" << std::endl;
-    std::cout << "Nome: " << getNome() << std::endl;
-    std::cout << "CPF: " << getCPF() << std::endl;
-    std::cout << "Data de Nascimento: " << getDataNascimento() << std::endl;
-    std::cout << "Gênero: " << getGenero() << std::endl;
-    std::cout << "Telefone: " << getTelefone() << std::endl;
-    std::cout << "Turno: " << turno << std::endl;
-    std::cout << "Código de Acesso: " << codigoAcesso << std::endl;
+    cout << "\n=== Dados do Recepcionista ===" << endl;
+    cout << "Nome: " << getNome() << endl;
+    cout << "CPF: " << getCPF() << endl;
+    cout << "Data de Nascimento: " << getDataNascimento() << endl;
+    cout << "Gênero: " << getGenero() << endl;
+    cout << "Telefone: " << getTelefone() << endl;
+    cout << "Turno: " << turno << endl;
+    cout << "Código de Acesso: " << codigoAcesso << endl;
     // Nota: A senha não é exibida por questões de segurança
 }

@@ -1,15 +1,13 @@
 #include "ui/Listagens.hpp"
 #include <iostream>
+#include "utils.hpp"
+
 using namespace std;
 
 namespace ListagensUI {
   void listarMedicos(const InMemoryDB& db) {
 
-    #ifdef _WIN32
-      system('cls');
-    #else
-      system("clear");
-    #endif
+    clearScreen();
 
     cout << "\n--- Lista de Médicos Cadastrados ---" << endl;
 
@@ -27,11 +25,7 @@ namespace ListagensUI {
 
   void listarPacientes(const InMemoryDB& db) {
     
-    #ifdef _WIN32
-      system('cls');
-    #else
-      system("clear");
-    #endif
+    clearScreen();
 
     cout << "\n--- Lista de Pacientes Cadastrados ---" << endl;
 

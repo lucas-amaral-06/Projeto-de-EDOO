@@ -4,16 +4,13 @@
 #include "ui/Auth.hpp"
 #include "ui/Listagens.hpp"
 #include "db/InMemoryDB.hpp"
+#include "utils.hpp"
 
 using namespace std;
 
 void login(InMemoryDB& db) {
 
-  #ifdef _WIN32
-    system('cls');
-  #else
-    system("clear");
-  #endif
+  clearScreen();
   
   cout << "\n--- Login no Sistema ---" << endl;
   cout << "Digite seu CPF (ex: XXX.XXX.XXX-XX): ";
@@ -75,11 +72,7 @@ void fluxoDeRegistro(InMemoryDB& db) {
 
 int main() {
 
-  #ifdef _WIN32
-    system('cls');
-  #else
-    system("clear");
-  #endif
+  clearScreen();
 
   InMemoryDB db; // Inicializa o banco de dados em memória
 
@@ -89,11 +82,8 @@ int main() {
 
   bool executando = true;
   while (executando){
-    #ifdef _WIN32
-      system('cls');
-    #else
-      system("clear");
-    #endif
+    
+    clearScreen();
 
     int escolha = MenuUI::exibirMenuInicial();
 
