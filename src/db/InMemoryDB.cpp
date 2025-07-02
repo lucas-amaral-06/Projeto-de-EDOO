@@ -5,7 +5,7 @@
 using namespace std;
 
 InMemoryDB::InMemoryDB() {
-  cout << "Inicializando banco de dados em memória..." << endl;
+  cout << "Inicializando banco de dados em memória...\n" << endl;
 
   // --- CRIANDO MÉDICOS ---
   medicosDB.emplace_back("Ana Souza", "543.123.456-78", "20/02/1980", "Feminino", "(81) 97766-5544", "CRM/PE 12345", "Cardiologia");
@@ -57,7 +57,8 @@ InMemoryDB::InMemoryDB() {
     pacienteLucas->getProntuario().adicionarEvolucao(evolucao1);
   }
 
-  cout << "Banco de dados em memória inicializado com sucesso!" << endl;
+  cout << "\nBanco de dados em memória inicializado com sucesso!" << endl;
+  cout << "Banco de dados inicializado com " << this->medicosDB.size() << " médicos, " << this->recepcionistasDB.size() << " recepcionistas e " << this->pacientesDB.size() << " pacientes." << endl;
 }
 
 Paciente* InMemoryDB::buscarPacientePorCPF(const string& cpf) {

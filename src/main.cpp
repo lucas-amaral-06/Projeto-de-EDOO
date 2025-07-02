@@ -76,8 +76,7 @@ int main() {
 
   InMemoryDB db; // Inicializa o banco de dados em memória
 
-  cout << "Banco de dados inicializado com " << db.pacientesDB.size() << " pacientes e " << db.medicosDB.size() << " médicos." << endl;
-  cout << "Pressione Enter para continuar..." << endl;
+  cout << "\nPressione Enter para continuar... ";
   cin.get();
 
   bool executando = true;
