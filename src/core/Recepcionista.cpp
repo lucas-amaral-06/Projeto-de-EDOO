@@ -42,7 +42,6 @@ void Recepcionista::setTurno(const string& novoTurno) {
 
 // Método para exibir todos os dados
 void Recepcionista::exibirDados() const {
-    cout << "\n=== Dados do Recepcionista ===" << endl;
     cout << "Nome: " << getNome() << endl;
     cout << "CPF: " << getCPF() << endl;
     cout << "Data de Nascimento: " << getDataNascimento() << endl;

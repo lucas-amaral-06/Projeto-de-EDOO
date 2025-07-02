@@ -27,30 +27,22 @@ namespace ListagensUI {
   }
 
   void listarRecepcionistas(const InMemoryDB& db) {
-
       clearScreen();
       MenuUI::exibirBanner();
 
-      cout << "\n--- LISTA DE RECEPCIONISTAS CADASTRADOS ---\n";
+      cout << "\n--- Lista de Recepcionistas Cadastrados ---\n";
 
       if(db.recepcionistasDB.empty()) {
-          cout << "Nenhum recepcionista cadastrado no sistema." << endl;
+          cout << "Nenhum recepcionista cadastrado." << endl;
       } else {
-          cout << "\nTotal de recepcionistas: " << db.recepcionistasDB.size() << "\n" << endl;
-          
           for (const auto& recepcionista : db.recepcionistasDB) {
-              cout << "========================================" << endl;
+              cout << "\n----------------------------------------\n\n";
               recepcionista.exibirDados();
-              // Mostra apenas informações básicas de segurança
               cout << "Turno: " << recepcionista.getTurno() << endl;
               cout << "Código de Acesso: " << recepcionista.getCodigoAcesso() << endl;
-              // Não mostra a senha por segurança
           }
-          cout << "========================================" << endl;
+          cout << "\n----------------------------------------\n\n";
       }
-
-      cout << "\nPressione Enter para voltar...";
-      cin.ignore();
-      cin.get();
   }
+      
 }
