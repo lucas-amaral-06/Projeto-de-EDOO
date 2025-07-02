@@ -16,6 +16,16 @@ InMemoryDB::InMemoryDB() {
 
   cout << "Médicos criados com sucesso!" << endl;
 
+  // --- CRIANDO RECEPCIONISTAS ---
+  recepcionistasDB.emplace_back("Juliana Santos", "111.222.333-44", "15/05/1988", "Feminino", 
+                               "(11) 98888-9999", "senha123", "Manhã", "REC001");
+  recepcionistasDB.emplace_back("Marcos Oliveira", "555.666.777-88", "22/09/1990", "Masculino", 
+                               "(11) 97777-8888", "senha456", "Tarde", "REC002");
+  recepcionistasDB.emplace_back("Fernanda Costa", "999.888.777-66", "10/03/1985", "Feminino", 
+                               "(11) 96666-7777", "senha789", "Noite", "REC003");
+
+  cout << "Recepcionistas criados com sucesso!" << endl;
+
   // --- CRIANDO PACIENTES ---
   pacientesDB.emplace_back("João da Silva", "123.456.789-00", "01/01/1990", "Masculino", "(11) 98765-4321");
   pacientesDB.emplace_back("Maria Santos", "234.567.890-11", "02/02/1992", "Feminino", "(21) 97654-3210");
@@ -37,6 +47,9 @@ InMemoryDB::InMemoryDB() {
   Medico* medicoFernanda = buscarMedicoPorCRM("CRM/RJ 11223");
   Medico* medicoRoberto = buscarMedicoPorCRM("CRM/MG 44556");
   Medico* medicoMariana = buscarMedicoPorCRM("CRM/PR 77889");
+
+  Recepcionista* recepcionistaJuliana = buscarRecepcionistaPorCPF("111.222.333-44");
+  Recepcionista* recepcionistaMarcos = buscarRecepcionistaPorCPF("555.666.777-88");
   
   // --- CRIANDO PRONTUÁRIOS ---
   if (pacienteLucas && medicoAna) {
@@ -63,4 +76,13 @@ Medico* InMemoryDB::buscarMedicoPorCRM(const string& crm) {
     }
   }
   return nullptr; // Retorna nullptr se não encontrar o médico
+}
+
+Recepcionista* InMemoryDB::buscarRecepcionistaPorCPF(const string& cpf) {
+  for (auto& recepcionista : this->recepcionistasDB) {
+    if (recepcionista.getCPF() == cpf) {
+      return &recepcionista;
+    }
+  }
+  return nullptr; // Retorna nullptr se não encontrar o recepcionista
 }
