@@ -83,7 +83,7 @@ namespace Auth
 
     void registrarMedico(vector<Medico> &medicoDB)
     {
-        string nome, cpf, dataNascimento, genero, telefone, crm, especialidade;
+        string nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha;
 
         cout << "\n--- Cadastro de Novo Médico ---" << endl;
         cout << "Digite o nome completo do médico: ";
@@ -124,8 +124,11 @@ namespace Auth
         cout << "Digite a especialidade do médico: ";
         getline(cin, especialidade);
 
+        cout << "Digite a senha do médico: ";
+        getline(cin, senha);
+
         try {
-            medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade);
+            medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha);
             cout << "\nSUCESSO: Med " << nome << " cadastrado com sucesso!" << endl;
         } catch (const exception &e) {
             cerr << "\nERRO: " << e.what() << endl;

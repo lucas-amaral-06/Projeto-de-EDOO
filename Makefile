@@ -17,7 +17,10 @@ BUILDDIR = build
 EXECUTABLE = $(BUILDDIR)/clinica.exe
 
 # --- Detecção Automática de Arquivos ---
-SOURCES := $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp)
+SOURCES := $(wildcard $(SRCDIR)/*.cpp) \
+           $(wildcard $(SRCDIR)/core/*.cpp) \
+           $(wildcard $(SRCDIR)/db/*.cpp) \
+           $(wildcard $(SRCDIR)/ui/*.cpp)
 OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
 # Detecta sistema operacional

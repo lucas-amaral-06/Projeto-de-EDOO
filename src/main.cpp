@@ -72,13 +72,13 @@ void loginRecepcionista(InMemoryDB& db) {
 
           // Verificar se o usuário quer voltar
 
-          if (senha == "0"){
+          if (codigoAcesso == "0"){
             return;
           }
 
           // Se for o código de acesso correto
 
-          if(recepcionistaLogin->getCodigoAcesso() == codigoAcesso) {
+          if(codigoAcesso == recepcionistaLogin->getCodigoAcesso()) {
 
             cout << "\nLogin realizado com sucesso! Bem-vindo(a), " 
                   << recepcionistaLogin->getNome() << "!\n";
@@ -105,47 +105,82 @@ void loginRecepcionista(InMemoryDB& db) {
   }
 }
 
-// Função para login de paciente (adaptada da sua versão local)
-void loginPaciente(InMemoryDB& db) {
+// Função para login do médico
+void loginMedico(InMemoryDB& db) {
+  while(true) {
     clearScreen();
     MenuUI::exibirBanner();
-    cout << "\n--- LOGIN PACIENTE ---\n\n";
-    cout << "Digite seu CPF (ex: XXX.XXX.XXX-XX): ";
-    string cpf;
-    getline(cin, cpf);
+    cout << "\n--- LOGIN MÉDICO ---\n\n";
+    
+    cout << "Digite seu CRM (CRM/XX XXXXX) ou '0' para voltar: ";
+    string crm;
+    getline(cin, crm);
 
-    if (!validarCPF(cpf)) {
-        cout << "\nPressione Enter para continuar..." << endl;
-        cin.get();
-        return;
+    // Opção para sair
+    if (crm == "0") {
+      return;
     }
+    // Validação do formato do CRM
+    else if (!validarCRM(crm)) {
+      cout << "\nERRO: Por favor, respeite o formato do CRM (CRM/XX XXXXX)." << endl;
+      cout << "Pressione Enter para continuar... ";
+      cin.get();
+    } 
+    // Verificação se está cadastrado
+    else {
+      Medico* medicoLogin = db.buscarMedicoPorCRM(crm);
+      
+      if(!medicoLogin) {
+          cout << "\nERRO: Médico com CRM " << crm << " não cadastrado.\n";
+          cout << "Pressione Enter para continuar... ";
+          cin.get();
+      } 
+      // Se está cadastrado
+      else {
+        // Solicitar senha
+        cout << "Digite sua senha ou '0' para voltar: ";
+        string senha;
+        getline(cin, senha);
 
-    Paciente *pacienteLogin = db.buscarPacientePorCPF(cpf);
-
-    if (pacienteLogin) {
-        cout << "\nLogin realizado com sucesso! Bem vindo(a), " << pacienteLogin->getNome() << "!" << endl;
-    } else {
-        cout << "\nERRO: Paciente com CPF " << cpf << " não encontrado." << endl;
+        // Verificar se o usuário quer voltar
+        if (senha == "0") {
+            return;
+        }
+        // Verificar senha
+        else if (senha == medicoLogin->getSenha()) {
+          cout << "\nLogin realizado com sucesso! Bem-vindo(a), Dr(a). " 
+                << medicoLogin->getNome() << "!\n";
+          
+          // Futuramente: menu do médico seria chamado aqui
+          cout << "Pressione Enter para continuar...";
+          cin.get();
+          return;
+        } 
+        else {
+          cout << "\nERRO: Senha incorreta.\n";
+          cout << "Pressione Enter para tentar novamente... ";
+          cin.get();
+        }
+      }
     }
-    cout << "Pressione Enter para continuar..." << endl;
-    cin.get();
+  }
 }
 
 // Menu principal de Login (lógica do GitHub)
 void login(InMemoryDB& db) {
-    // Nota: Esta função depende da criação de 'exibirMenuLogin' em Menu.cpp
-    int escolha = MenuUI::exibirMenuLogin(); 
+  // Nota: Esta função depende da criação de 'exibirMenuLogin' em Menu.cpp
+  int escolha = MenuUI::exibirMenuLogin(); 
 
-    switch (escolha) {
-        case 1:
-            loginPaciente(db);
-            break;
-        case 2:
-            loginRecepcionista(db);
-            break;
-        case 3: // Voltar
-            break;
-    }
+  switch (escolha) {
+      case 1:
+          loginMedico(db);
+          break;
+      case 2:
+          loginRecepcionista(db);
+          break;
+      case 3: // Voltar
+          break;
+  }
 }
 
 
@@ -197,6 +232,7 @@ void fluxoDeRegistro(InMemoryDB &db) {
 
 int main() {
     clearScreen();
+    MenuUI::exibirBanner();
     // Você precisará adicionar o comando para corrigir a acentuação aqui
     // Ex: SetConsoleOutputCP(CP_UTF8); no Windows
 
