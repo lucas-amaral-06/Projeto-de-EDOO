@@ -23,15 +23,20 @@ void loginRecepcionista(InMemoryDB& db) {
       // Opção para sair
       if (cpf == "0") {
           return;
+
+      }
+
       //Caso não respeite o formato do CPF, pede novamente
-      } else if (!(validarFormatoCPF(cpf))){
+      else if (!(validarFormatoCPF(cpf))){
         cout << "\nERRO: Por favor, respeite o formato do CPF." << endl;
         cout << "Pressione Enter para continuar... ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      //Caso respeite, verificamos se o CPF está cadastrado
-      } else {
-        // Verificar se o CPF está cadastrado
+
+      } 
+      
+      //Caso respeite o formato do CPF, verificamos se ele está cadastrado
+      else {
         Recepcionista* recepcionistaLogin = db.buscarRecepcionistaPorCPF(cpf);
         
         // Se o CPF não está cadastrado
@@ -42,19 +47,27 @@ void loginRecepcionista(InMemoryDB& db) {
           cin.clear();
           cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+        }
+
         // Se está cadastrado
-        }else{
+        else {
 
           // Solicitar senha
-          cout << "Digite seu código de acesso: ";
-          string codigoAcesso;
-          getline(cin, codigoAcesso);
+          cout << "Digite sua senha ou '0' para voltar: ";
+          string senha;
+          getline(cin, senha);
+
+          // Verificar se o usuário quer voltar
+          if (senha == "0"){
+            
+            return;
+
+          }
 
           // Verificar senha
-          if(recepcionistaLogin->getCodigoAcesso() == codigoAcesso) {
+          else if (senha == recepcionistaLogin->getSenha()) {
               cout << "\nLogin realizado com sucesso! Bem-vindo(a), " 
                     << recepcionistaLogin->getNome() << "!\n";
-              cout << "Turno: " << recepcionistaLogin->getTurno() << "\n\n";
               
               // Aqui você implementaria:
               // menuRecepcionista(*recepcionistaLogin, db);
@@ -63,13 +76,14 @@ void loginRecepcionista(InMemoryDB& db) {
               cout << "Pressione Enter para continuar...";
               cin.ignore();
               return;
+              
           } else {
               cout << "\nERRO: Código de acesso incorreto.\n";
           }
 
           cout << "\nPressione Enter para tentar novamente...";
           cin.ignore();
-          
+
         }
       }
   }
