@@ -1,8 +1,8 @@
 # Compilador C++
 CXX = g++
 
-# Flags do compilador: -std=c++17 para usar recursos modernos, -g para debug, -Wall para avisos
-CXXFLAGS = -std=c++17 -g -Wall
+# Flags do compilador: -std=c++23 para usar recursos modernos, -g para debug, -Wall para avisos
+CXXFLAGS = -std=c++23 -g -Wall
 
 # Diretório de includes
 INCLUDES = -Iinclude

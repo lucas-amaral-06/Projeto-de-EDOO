@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Medico::Medico(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& crm, const string& especialidade): Pessoa(nome, cpf, dataNascimento, genero, telefone) 
+Medico::Medico(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& crm, const string& especialidade): Pessoa(nome, cpf, dataNascimento, genero, telefone)
 {
   this->crm = crm;
   this->especialidade = especialidade;

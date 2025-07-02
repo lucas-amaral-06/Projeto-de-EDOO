@@ -4,6 +4,13 @@ using namespace std;
 
 namespace ListagensUI {
   void listarMedicos(const InMemoryDB& db) {
+
+    #ifdef _WIN32
+      system('cls');
+    #else
+      system("clear");
+    #endif
+
     cout << "\n--- Lista de Médicos Cadastrados ---" << endl;
 
     if(db.medicosDB.empty()) {
@@ -19,6 +26,13 @@ namespace ListagensUI {
   }
 
   void listarPacientes(const InMemoryDB& db) {
+    
+    #ifdef _WIN32
+      system('cls');
+    #else
+      system("clear");
+    #endif
+
     cout << "\n--- Lista de Pacientes Cadastrados ---" << endl;
 
     if(db.pacientesDB.empty()) {

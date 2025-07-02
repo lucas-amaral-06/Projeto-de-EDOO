@@ -14,6 +14,8 @@ InMemoryDB::InMemoryDB() {
   medicosDB.emplace_back("Roberto Costa", "321.654.987-00", "05/05/1985", "Masculino", "(31) 95555-4444", "CRM/MG 44556", "Ortopedia");
   medicosDB.emplace_back("Mariana Oliveira", "654.321.987-00", "30/06/1992", "Feminino", "(41) 92222-3333", "CRM/PR 77889", "Ginecologia");
 
+  cout << "Médicos criados com sucesso!" << endl;
+
   // --- CRIANDO PACIENTES ---
   pacientesDB.emplace_back("João da Silva", "123.456.789-00", "01/01/1990", "Masculino", "(11) 98765-4321");
   pacientesDB.emplace_back("Maria Santos", "234.567.890-11", "02/02/1992", "Feminino", "(21) 97654-3210");

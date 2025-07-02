@@ -99,11 +99,11 @@ namespace MenuUI {
     int escolha = 0;
 
     while (true) {
-      // #ifdef _WIN32
-      //   system("cls");
-      // #else
-      //   system("clear");
-      // #endif
+      #ifdef _WIN32
+        system("cls");
+      #else
+        system("clear");
+      #endif
 
       cout << "\n--- Menu de Visualização ---" << endl;
       cout << "Você deseja listar:" << endl;

@@ -8,7 +8,7 @@ class Medico : public Pessoa
   private:
     string crm;
     string especialidade;
-
+  
   public:
     Medico(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& crm, const string& especialidade);
 

@@ -8,6 +8,13 @@
 using namespace std;
 
 void login(InMemoryDB& db) {
+
+  #ifdef _WIN32
+    system('cls');
+  #else
+    system("clear");
+  #endif
+  
   cout << "\n--- Login no Sistema ---" << endl;
   cout << "Digite seu CPF (ex: XXX.XXX.XXX-XX): ";
   string cpf;
@@ -67,6 +74,13 @@ void fluxoDeRegistro(InMemoryDB& db) {
 }
 
 int main() {
+
+  #ifdef _WIN32
+    system('cls');
+  #else
+    system("clear");
+  #endif
+
   InMemoryDB db; // Inicializa o banco de dados em memória
 
   cout << "Banco de dados inicializado com " << db.pacientesDB.size() << " pacientes e " << db.medicosDB.size() << " médicos." << endl;
