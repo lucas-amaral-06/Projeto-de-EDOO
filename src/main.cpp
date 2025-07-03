@@ -148,12 +148,9 @@ void loginMedico(InMemoryDB& db) {
         }
         // Verificar senha
         else if (senha == medicoLogin->getSenha()) {
-          cout << "\nLogin realizado com sucesso! Bem-vindo(a), Dr(a). " 
-                << medicoLogin->getNome() << "!\n";
           
-          // Futuramente: menu do médico seria chamado aqui
-          cout << "Pressione Enter para continuar...";
-          cin.get();
+          menuMédico(medicoLogin);
+
           return;
         } 
         else {
@@ -209,6 +206,9 @@ void fluxoDeListagens(InMemoryDB &db) {
 void fluxoDeRegistro(InMemoryDB &db) {
     int escolha = MenuUI::exibirMenuRegistro();
 
+    clearScreen();
+    MenuUI::exibirBanner();
+
     switch (escolha) {
         case 1: // Alterado para corresponder ao novo Menu.cpp (Recepcionista)
             Auth::registrarRecepcionista(db.recepcionistasDB);
@@ -222,7 +222,7 @@ void fluxoDeRegistro(InMemoryDB &db) {
     }
 
     if (escolha != 3) {
-        cout << "Pressione Enter para continuar..." << endl;
+        cout << "Pressione Enter para continuar... ";
         cin.get();
     }
 }

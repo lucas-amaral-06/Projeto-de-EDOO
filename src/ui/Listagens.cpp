@@ -11,17 +11,17 @@ namespace ListagensUI {
     clearScreen();
     MenuUI::exibirBanner();
 
-    cout << "\n--- Lista de Médicos Cadastrados ---\n";
+    cout << "\n--- MÉDICOS CADASTRADOS ---\n";
 
     if(db.medicosDB.empty()) {
       cout << "Nenhum médico cadastrado." << endl;
     }else{
       for (const auto& medico : db.medicosDB) {
-        cout << "\n----------------------------------------\n\n";
+        cout << "\n\n\n";
         medico.exibirDados();
       }
 
-      cout << "\n----------------------------------------\n\n";
+      cout << "\n\n\n";
     }
 
   }
@@ -30,18 +30,16 @@ namespace ListagensUI {
       clearScreen();
       MenuUI::exibirBanner();
 
-      cout << "\n--- Lista de Recepcionistas Cadastrados ---\n";
+      cout << "\n--- RECEPCIONISTAS CADASTRADOS ---\n";
 
       if(db.recepcionistasDB.empty()) {
           cout << "Nenhum recepcionista cadastrado." << endl;
       } else {
           for (const auto& recepcionista : db.recepcionistasDB) {
-              cout << "\n----------------------------------------\n\n";
+              cout << "\n\n\n";
               recepcionista.exibirDados();
-              cout << "Turno: " << recepcionista.getTurno() << endl;
-              cout << "Código de Acesso: " << recepcionista.getCodigoAcesso() << endl;
           }
-          cout << "\n----------------------------------------\n\n";
+          cout << "\n\n\n";
       }
   }
       

@@ -133,7 +133,6 @@ namespace MenuUI {
       }
     }
 
-    // AQUI ESTÁ A FUNÇÃO CORRIGIDA
     int exibirMenuRegistro() {
       int escolha = 0;
 
@@ -142,7 +141,6 @@ namespace MenuUI {
         exibirBanner();
         
         cout << "\n--- MENU DE REGISTRO ---\n\n";
-        cout << "O que você deseja registrar?\n";
         cout << "1. Novo Recepcionista" << endl;
         cout << "2. Novo Médico" << endl;
         cout << "3. Voltar ao menu anterior\n\n";

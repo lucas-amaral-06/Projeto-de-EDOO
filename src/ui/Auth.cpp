@@ -39,7 +39,7 @@ namespace Auth
     {
         string nome, cpf, dataNascimento, genero, telefone, senha, turno, codigoAcesso;
 
-        cout << "\n--- Cadastro de Novo(a) Recepcionista ---" << endl;
+        cout << "\n--- CADASTRO DE NOVO(A) RECEPCIONISTA ---\n\n";
         cout << "Digite o nome completo: ";
         getline(cin, nome);
 
@@ -85,7 +85,7 @@ namespace Auth
     {
         string nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha;
 
-        cout << "\n--- Cadastro de Novo Médico ---" << endl;
+        cout << "\n--- CADASTRO DE NOVO MÉDICO ---\n\n";
         cout << "Digite o nome completo do médico: ";
         getline(cin, nome);
 
@@ -109,12 +109,12 @@ namespace Auth
 
         cout << "Digite o gênero do médico: ";
         getline(cin, genero);
-        cout << "Digite o telefone do médico (formato: (XX) XXXXX-XXXX): ";
+        cout << "Digite o telefone do médico (XX) XXXXX-XXXX): ";
         getline(cin, telefone);
 
         // Loop de validação para CRM
         while (true) {
-            cout << "Digite o CRM do médico (ex: CRM/PE 12345): ";
+            cout << "Digite o CRM do médico (CRM/XX XXXXX): ";
             getline(cin, crm);
             if (validarCRM(crm)) {
                 break;
@@ -129,7 +129,7 @@ namespace Auth
 
         try {
             medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha);
-            cout << "\nSUCESSO: Med " << nome << " cadastrado com sucesso!" << endl;
+            cout << "\nSUCESSO: Médico " << nome << " cadastrado com sucesso!" << endl;
         } catch (const exception &e) {
             cerr << "\nERRO: " << e.what() << endl;
             cerr << "Falha ao cadastrar o médico. Verifique os dados informados." << endl;
