@@ -13,7 +13,9 @@ Medico::Medico(const string& nome,
     : Pessoa(nome, cpf, dataNascimento, genero, telefone),
       crm(crm),
       especialidade(especialidade),
-      senha(senha) {}
+      senha(senha),
+      agenda() {
+}
 
 Medico::~Medico() {}
 
@@ -27,6 +29,14 @@ string Medico::getEspecialidade() const {
 
 string Medico::getSenha() const {
     return senha;
+}
+
+Agenda& Medico::getAgenda() {
+    return agenda;
+}
+
+const Agenda& Medico::getAgenda() const {
+    return agenda;
 }
 
 void Medico::setEspecialidade(const string& especialidade) {
