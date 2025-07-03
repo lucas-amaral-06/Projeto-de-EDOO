@@ -9,6 +9,13 @@
 
 using namespace std;
 
+// --- FUNÇÕES DE MENU ---
+
+//Função para menu de médico
+void menuMédico(Medico* medico) {
+  
+}
+
 // --- FUNÇÕES DE LOGIN (LÓGICA COMBINADA) ---
 
 // Função para login de recepcionista (vinda da versão do GitHub)

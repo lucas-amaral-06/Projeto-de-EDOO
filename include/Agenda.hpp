@@ -11,14 +11,14 @@ private:
     class Horario {
     private:
         string intervalo;
-        Consulta* consulta;
+        Consulta consulta;
         
     public:
         Horario(const string& interv);
         
-        void marcarConsulta(Consulta* c);
+        void marcarConsulta(Consulta c);
         void cancelarConsulta();
-        Consulta* getConsulta() const;
+        Consulta getConsulta() const;
         string getIntervalo() const;
         bool estaLivre() const;
     };
@@ -27,30 +27,25 @@ private:
     private:
         string nomeDia;
         array<Horario, 8> horarios;
-        
+            
     public:
-        Dia(const string& nome);
-        
+        Dia(const string nome);
+        ~Dia();  // Declaração do destrutor
+            
         string getNomeDia() const;
         array<Horario, 8>& getHorarios();
         const array<Horario, 8>& getHorarios() const;
-        
-        bool agendarConsulta(int index, Consulta* consulta);
-        bool cancelarConsulta(int index);
     };
 
     array<Dia, 5> diasUteis;
 
 public:
     Agenda();
+    ~Agenda();
     
-    bool agendarConsulta(int diaSemana, int horario, Consulta* consulta);
-    bool cancelarConsulta(int diaSemana, int horario);
     void exibir() const;
     
-    Consulta* getConsulta(int diaSemana, int horario) const;
-    const array<Horario, 8>& getHorariosDia(int diaSemana) const;
-    const array<Dia, 5>& getDiasUteis() const;
+    const array<Dia, 5> getDiasUteis() const;
 };
 
 #endif
