@@ -9,22 +9,52 @@ using namespace std;
 
 namespace Auth
 {
-    // A função registrarPaciente permanece sem as validações por enquanto,
+    // Função registrarPaciente com validações completas
     void registrarPaciente(vector<Paciente> &pacienteDB)
     {
         string nome, cpf, dataNascimento, genero, telefone;
 
-        cout << "\n--- Cadastro de Novo Paciente ---" << endl;
-        cout << "Digite o nome completo do paciente: ";
-        getline(cin, nome);
-        cout << "Digite o CPF do paciente (XXX.XXX.XXX-XX): ";
-        getline(cin, cpf);
-        cout << "Digite a data de nascimento do paciente (DD/MM/AAAA): ";
-        getline(cin, dataNascimento);
-        cout << "Digite o gênero do paciente: ";
-        getline(cin, genero);
-        cout << "Digite o telefone do paciente (formato: (XX) XXXXX-XXXX): ";
-        getline(cin, telefone);
+        cout << "\n--- Cadastro de Novo Paciente ---\n" << endl;
+
+        // Validação para não deixar o nome em branco
+        while (true) {
+            cout << "Digite o nome completo do paciente: ";
+            getline(cin, nome);
+            if (!nome.empty()) break;
+            cout << "\nERRO: O nome não pode ficar em branco. Tente novamente.\n";
+        }
+
+        // Loop de validação para CPF com feedback
+        while (true) {
+            cout << "Digite o CPF do paciente (XXX.XXX.XXX-XX): ";
+            getline(cin, cpf);
+            if (validarCPF(cpf)) break;
+            cout << "\nERRO: Formato de CPF inválido. Use o formato XXX.XXX.XXX-XX. Tente novamente.\n";
+        }
+
+        // Loop de validação para Data de Nascimento com feedback
+        while (true) {
+            cout << "Digite a data de nascimento do paciente (DD/MM/AAAA): ";
+            getline(cin, dataNascimento);
+            if (validarData(dataNascimento)) break;
+            cout << "\nERRO: Data inválida. Use o formato DD/MM/AAAA com valores válidos. Tente novamente.\n";
+        }
+
+        // Validação para não deixar o gênero em branco
+        while (true) {
+            cout << "Digite o gênero do paciente: ";
+            getline(cin, genero);
+            if (!genero.empty()) break;
+            cout << "\nERRO: O gênero não pode ficar em branco. Tente novamente.\n";
+        }
+        
+        // Validação para não deixar o telefone em branco
+        while (true) {
+            cout << "Digite o telefone do paciente (formato: (XX) XXXXX-XXXX): ";
+            getline(cin, telefone);
+            if (!telefone.empty()) break;
+            cout << "\nERRO: O telefone não pode ficar em branco. Tente novamente.\n";
+        }
 
         try {
             pacienteDB.emplace_back(nome, cpf, dataNascimento, genero, telefone);
@@ -35,42 +65,69 @@ namespace Auth
         }
     }
 
+    // Função registrarRecepcionista com validações completas
     void registrarRecepcionista(vector<Recepcionista>& recepcionistaDB)
     {
         string nome, cpf, dataNascimento, genero, telefone, senha, turno, codigoAcesso;
 
         cout << "\n--- CADASTRO DE NOVO(A) RECEPCIONISTA ---\n\n";
-        cout << "Digite o nome completo: ";
-        getline(cin, nome);
+        
+        // Validação de campos em branco e formatos
+        while (true) {
+            cout << "Digite o nome completo: ";
+            getline(cin, nome);
+            if (!nome.empty()) break;
+            cout << "\nERRO: O nome não pode ficar em branco. Tente novamente.\n";
+        }
 
-        // Loop de validação para CPF
         while (true) {
             cout << "Digite o CPF (XXX.XXX.XXX-XX): ";
             getline(cin, cpf);
-            if (validarCPF(cpf)) {
-                break; // Sai do loop se o CPF for válido
-            }
+            if (validarCPF(cpf)) break;
+            cout << "\nERRO: Formato de CPF inválido. Use o formato XXX.XXX.XXX-XX. Tente novamente.\n";
         }
 
-        // Loop de validação para Data de Nascimento
         while (true) {
             cout << "Digite a data de nascimento (DD/MM/AAAA): ";
             getline(cin, dataNascimento);
-            if (validarData(dataNascimento)) {
-                break; // Sai do loop se a data for válida
-            }
+            if (validarData(dataNascimento)) break;
+            cout << "\nERRO: Data inválida. Use o formato DD/MM/AAAA com valores válidos. Tente novamente.\n";
         }
 
-        cout << "Digite o gênero: ";
-        getline(cin, genero);
-        cout << "Digite o telefone (XX) XXXXX-XXXX: ";
-        getline(cin, telefone);
-        cout << "Crie uma senha de acesso: ";
-        getline(cin, senha);
-        cout << "Digite o turno de trabalho (Manhã, Tarde, Noite): ";
-        getline(cin, turno);
-        cout << "Digite o código de acesso (ex: REC004): ";
-        getline(cin, codigoAcesso);
+        while (true) {
+            cout << "Digite o gênero: ";
+            getline(cin, genero);
+            if (!genero.empty()) break;
+            cout << "\nERRO: O gênero não pode ficar em branco. Tente novamente.\n";
+        }
+        
+        while (true) {
+            cout << "Digite o telefone (XX) XXXXX-XXXX: ";
+            getline(cin, telefone);
+            if (!telefone.empty()) break;
+            cout << "\nERRO: O telefone não pode ficar em branco. Tente novamente.\n";
+        }
+        
+        while (true) {
+            cout << "Crie uma senha de acesso: ";
+            getline(cin, senha);
+            if (!senha.empty()) break;
+            cout << "\nERRO: A senha não pode ficar em branco. Tente novamente.\n";
+        }
+        
+        while (true) {
+            cout << "Digite o turno de trabalho (Manhã, Tarde, Noite): ";
+            getline(cin, turno);
+            if (!turno.empty()) break;
+            cout << "\nERRO: O turno não pode ficar em branco. Tente novamente.\n";
+        }
+
+        while (true) {
+            cout << "Digite o código de acesso (ex: REC004): ";
+            getline(cin, codigoAcesso);
+            if (!codigoAcesso.empty()) break;
+            cout << "\nERRO: O código de acesso não pode ficar em branco. Tente novamente.\n";
+        }
 
         try {
             recepcionistaDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, senha, turno, codigoAcesso);
@@ -81,51 +138,68 @@ namespace Auth
         }
     }
 
+    // Função registrarMedico com validações completas
     void registrarMedico(vector<Medico> &medicoDB)
     {
         string nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha;
 
         cout << "\n--- CADASTRO DE NOVO MÉDICO ---\n\n";
-        cout << "Digite o nome completo do médico: ";
-        getline(cin, nome);
 
-        // Loop de validação para CPF
+        while (true) {
+            cout << "Digite o nome completo do médico: ";
+            getline(cin, nome);
+            if (!nome.empty()) break;
+            cout << "\nERRO: O nome não pode ficar em branco. Tente novamente.\n";
+        }
+
         while (true) {
             cout << "Digite o CPF do médico (XXX.XXX.XXX-XX): ";
             getline(cin, cpf);
-            if (validarCPF(cpf)) {
-                break;
-            }
+            if (validarCPF(cpf)) break;
+            cout << "\nERRO: Formato de CPF inválido. Use o formato XXX.XXX.XXX-XX. Tente novamente.\n";
         }
 
-        // Loop de validação para Data de Nascimento
         while (true) {
             cout << "Digite a data de nascimento do médico (DD/MM/AAAA): ";
             getline(cin, dataNascimento);
-            if (validarData(dataNascimento)) {
-                break;
-            }
+            if (validarData(dataNascimento)) break;
+            cout << "\nERRO: Data inválida. Use o formato DD/MM/AAAA com valores válidos. Tente novamente.\n";
         }
 
-        cout << "Digite o gênero do médico: ";
-        getline(cin, genero);
-        cout << "Digite o telefone do médico (XX) XXXXX-XXXX): ";
-        getline(cin, telefone);
-
-        // Loop de validação para CRM
         while (true) {
-            cout << "Digite o CRM do médico (CRM/XX XXXXX): ";
-            getline(cin, crm);
-            if (validarCRM(crm)) {
-                break;
-            }
+            cout << "Digite o gênero do médico: ";
+            getline(cin, genero);
+            if (!genero.empty()) break;
+            cout << "\nERRO: O gênero não pode ficar em branco. Tente novamente.\n";
         }
 
-        cout << "Digite a especialidade do médico: ";
-        getline(cin, especialidade);
+        while (true) {
+            cout << "Digite o telefone do médico (XX) XXXXX-XXXX): ";
+            getline(cin, telefone);
+            if (!telefone.empty()) break;
+            cout << "\nERRO: O telefone não pode ficar em branco. Tente novamente.\n";
+        }
 
-        cout << "Digite a senha do médico: ";
-        getline(cin, senha);
+        while (true) {
+            cout << "Digite o CRM do médico (CRM/UF XXXXX): ";
+            getline(cin, crm);
+            if (validarCRM(crm)) break;
+            cout << "\nERRO: Formato de CRM inválido. Use o formato CRM/UF XXXXX (ex: CRM/PE 12345). Tente novamente.\n";
+        }
+
+        while (true) {
+            cout << "Digite a especialidade do médico: ";
+            getline(cin, especialidade);
+            if (!especialidade.empty()) break;
+            cout << "\nERRO: A especialidade não pode ficar em branco. Tente novamente.\n";
+        }
+
+        while (true) {
+            cout << "Crie uma senha de acesso: ";
+            getline(cin, senha);
+            if (!senha.empty()) break;
+            cout << "\nERRO: A senha não pode ficar em branco. Tente novamente.\n";
+        }
 
         try {
             medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha);
