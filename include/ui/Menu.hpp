@@ -24,6 +24,10 @@ namespace MenuUI {
   int exibirMenuListagens();
 
   int exibirMenuLogin();
+
+  int exibirMenuMedico(const string& nomeMedico);
+
+  int exibirMenuCriarDocumento();
 }
 
 #endif

@@ -130,7 +130,7 @@ namespace Login
           }
         // Verificar senha
           else if (senha == medicoLogin->getSenha()) {
-            // menuMedico(medicoLogin);
+            MenuUI::exibirMenuMedico(medicoLogin->getNome());
             return;
           } 
           else {
