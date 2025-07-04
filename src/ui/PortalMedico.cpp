@@ -102,6 +102,8 @@ namespace PortalMedicoUI {
     }
   }
 
+
+// Aqui o Médico conseguir criar o atestado do Paciente
   void criarNovoAtestado(Medico& medico, InMemoryDB& db) {
     Paciente* paciente = encontrarPacienteParaAtendimento(db);
     if (!paciente) return;
@@ -124,6 +126,10 @@ namespace PortalMedicoUI {
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
 
     Atestado novoAtestado(DataUtils::getDataAtualFormatada(), &medico, dias, motivo);
+
+        paciente->getProntuario().adicionarAtestado(novoAtestado);
+
+        cout << "Atestado registrado com sucesso!" << endl;
   }
 
   void fluxoCriarDocumento(Medico& medico, InMemoryDB& db){
