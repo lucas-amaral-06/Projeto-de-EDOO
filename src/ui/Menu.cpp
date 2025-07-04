@@ -1,4 +1,5 @@
 #include "ui/Menu.hpp"
+#include "Medico.hpp"
 
 namespace MenuUI {
     void exibirBanner(){
