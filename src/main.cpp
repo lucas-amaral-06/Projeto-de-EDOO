@@ -15,14 +15,14 @@ void login(InMemoryDB& db) {
   int escolha = MenuUI::exibirMenuLogin(); 
 
   switch (escolha) {
-      case 1:
-          Login::loginMedico(db);
-          break;
-      case 2:
-          Login::loginRecepcionista(db);
-          break;
-      case 3: // Voltar
-          break;
+    case 1:
+      Login::loginMedico(db);
+      break;
+    case 2:
+      Login::loginRecepcionista(db);
+      break;
+    case 3: // Voltar
+      break;
   }
 }
 
@@ -30,47 +30,47 @@ void login(InMemoryDB& db) {
 // --- FLUXOS DE TELAS (LÓGICA DA SUA VERSÃO LOCAL) ---
 
 void fluxoDeListagens(InMemoryDB &db) {
-    int escolha = MenuUI::exibirMenuListagens();
+  int escolha = MenuUI::exibirMenuListagens();
 
-    switch (escolha) {
-        case 1:
-            ListagensUI::listarMedicos(db);
-            break;
-        case 2:
-            ListagensUI::listarRecepcionistas(db);
-            break;
-        case 3:
-            break;
-    }
+  switch (escolha) {
+    case 1:
+      ListagensUI::listarMedicos(db);
+      break;
+    case 2:
+      ListagensUI::listarRecepcionistas(db);
+      break;
+    case 3:
+      break;
+  }
 
-    if (escolha != 3) {
-        cout << "Pressione Enter para continuar... ";
-        cin.get();
-    }
+  if (escolha != 3) {
+    cout << "Pressione Enter para continuar... ";
+    cin.get();
+  }
 }
 
 void fluxoDeRegistro(InMemoryDB &db) {
-    int escolha = MenuUI::exibirMenuRegistro();
+  int escolha = MenuUI::exibirMenuRegistro();
 
-    clearScreen();
-    MenuUI::exibirBanner();
+  clearScreen();
+  MenuUI::exibirBanner();
 
-    switch (escolha) {
-        case 1: // Alterado para corresponder ao novo Menu.cpp (Recepcionista)
-            Auth::registrarRecepcionista(db.recepcionistasDB);
-            break;
-        case 2: // Alterado para corresponder ao novo Menu.cpp (Médico)
-            Auth::registrarMedico(db.medicosDB);
-            break;
-        case 3:
-            cout << "Retornando ao menu inicial..." << endl;
-            break;
-    }
+  switch (escolha) {
+    case 1: // Alterado para corresponder ao novo Menu.cpp (Recepcionista)
+      Auth::registrarRecepcionista(db.recepcionistasDB);
+      break;
+    case 2: // Alterado para corresponder ao novo Menu.cpp (Médico)
+      Auth::registrarMedico(db.medicosDB);
+      break;
+    case 3:
+      cout << "Retornando ao menu inicial..." << endl;
+      break;
+  }
 
-    if (escolha != 3) {
-        cout << "Pressione Enter para continuar... ";
-        cin.get();
-    }
+  if (escolha != 3) {
+    cout << "Pressione Enter para continuar... ";
+    cin.get();
+  }
 }
 
 
