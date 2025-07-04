@@ -139,7 +139,7 @@ namespace Auth
     }
 
     // Função registrarMedico com validações completas
-    void registrarMedico(vector<Medico> &medicoDB)
+    void registrarMedico(vector<unique_ptr<Medico>> &medicoDB)
     {
         string nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha;
 
@@ -202,7 +202,7 @@ namespace Auth
         }
 
         try {
-            medicoDB.emplace_back(nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha);
+            medicoDB.emplace_back(std::make_unique<Medico>(nome, cpf, dataNascimento, genero, telefone, crm, especialidade, senha));
             cout << "\nSUCESSO: Médico " << nome << " cadastrado com sucesso!" << endl;
         } catch (const exception &e) {
             cerr << "\nERRO: " << e.what() << endl;

@@ -18,7 +18,7 @@ namespace ListagensUI {
     }else{
       for (const auto& medico : db.medicosDB) {
         cout << "\n\n\n";
-        medico.exibirDados();
+        medico->exibirDados();
       }
 
       cout << "\n\n\n";
@@ -41,5 +41,20 @@ namespace ListagensUI {
           }
           cout << "\n\n\n";
       }
+  }
+
+  void listarPacientes(const InMemoryDB& db) {
+    cout << "\n--- Lista de Pacientes Cadastrados ---" << endl;
+
+    if(db.pacientesDB.empty()) {
+      cout << "Nenhum paciente cadastrado." << endl;
+      return;
+    }
+
+    for (const auto& paciente : db.pacientesDB) {
+      cout << "----------------------------------------" << endl;
+      paciente.exibirDados();
+    }
+    cout << "----------------------------------------" << endl;
   }
 }

@@ -33,6 +33,10 @@ Agenda::Dia::Dia(const std::string nome) : nomeDia(nome),
              Horario("14h00~15h00"), Horario("15h00~16h00"),
              Horario("16h00~17h00"), Horario("17h00~18h00")} {}
 
+void Agenda::Dia::adicionarConsulta(std::unique_ptr<Consulta> novaConsulta) {
+    todasAsConsultas.push_back(std::move(novaConsulta));
+}
+
 // É preciso ter a implementação do destrutor que foi declarado no .hpp
 Agenda::Dia::~Dia() {}
 
@@ -77,4 +81,28 @@ void Agenda::exibir() const {
             }
         }
     }
+}
+
+bool Agenda::adicionarConsulta(const std::string& diaSemana, const std::string& intervalo, std::unique_ptr<Consulta> novaConsulta) {
+	for (auto& dia : diasUteis) {
+		if (dia.getNomeDia() == diaSemana) {
+			for (auto& horario : dia.getHorarios()) {
+				if (horario.getIntervalo() == intervalo && horario.estaLivre()) {
+					Consulta* ptrConsulta = novaConsulta.get();
+					dia.adicionarConsulta(std::move(novaConsulta));
+					horario.marcarConsulta(ptrConsulta); // Marca o horário com a nova consulta
+					cout << "Consulta agendada para " << diaSemana << " no horário " << intervalo << ".\n";
+					return true;
+				} else {
+					cout << "Horário " << intervalo << " já está ocupado no dia " << diaSemana << ".\n";
+					return false;
+				}
+			}
+
+			cout << "ERRO: Horário " << intervalo << " inválido no dia " << diaSemana << ".\n";
+			return false;
+		}
+	}
+	std::cout << "ERRO: Dia " << diaSemana << " não inválido na agenda.\n";
+	return false;
 }

@@ -13,9 +13,9 @@ class InMemoryDB
 {
   public:
     vector<Paciente> pacientesDB;
-    vector<Medico> medicosDB;
+    vector<unique_ptr<Medico>> medicosDB;
     vector<Recepcionista> recepcionistasDB;
-        vector<Consulta> consultasDB; 
+    vector<Consulta> consultasDB; 
 
     // @brief Construtor que popula o banco de dados com dados de simulaçao.
     InMemoryDB();
