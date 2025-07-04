@@ -9,8 +9,8 @@ Prontuario::Prontuario(){
   this->pacienteCPF = "123.456.789-10"; // CPF do paciente vazio
 }
 
-Prontuario::Prontuario(Paciente* paciente) {
-  this->pacienteCPF = paciente->getCPF(); // Obtém o CPF do paciente
+Prontuario::Prontuario(Paciente& paciente) {
+  this->pacienteCPF = paciente.getCPF(); // Obtém o CPF do paciente
   this->numero = "PRONT-" + to_string(rand() % 10000);
   
   time_t now = time(0);
