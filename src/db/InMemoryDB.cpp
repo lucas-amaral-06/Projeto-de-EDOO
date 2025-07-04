@@ -17,12 +17,9 @@ InMemoryDB::InMemoryDB() {
   cout << "Médicos criados com sucesso!" << endl;
 
   // --- CRIANDO RECEPCIONISTAS ---
-  recepcionistasDB.emplace_back("Juliana Santos", "111.222.333-44", "15/05/1988", "Feminino", 
-                               "(11) 98888-9999", "senha123", "Manhã", "REC001");
-  recepcionistasDB.emplace_back("Marcos Oliveira", "555.666.777-88", "22/09/1990", "Masculino", 
-                               "(11) 97777-8888", "senha456", "Tarde", "REC002");
-  recepcionistasDB.emplace_back("Fernanda Costa", "999.888.777-66", "10/03/1985", "Feminino", 
-                               "(11) 96666-7777", "senha789", "Noite", "REC003");
+  recepcionistasDB.emplace_back("Juliana Santos", "111.222.333-44", "15/05/1988", "Feminino", "(11) 98888-9999", "senha123", "Manhã", "REC001");
+  recepcionistasDB.emplace_back("Marcos Oliveira", "555.666.777-88", "22/09/1990", "Masculino", "(11) 97777-8888", "senha456", "Tarde", "REC002");
+  recepcionistasDB.emplace_back("Fernanda Costa", "999.888.777-66", "10/03/1985", "Feminino", "(11) 96666-7777", "senha789", "Noite", "REC003");
 
   cout << "Recepcionistas criados com sucesso!" << endl;
 
