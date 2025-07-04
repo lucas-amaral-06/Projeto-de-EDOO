@@ -11,7 +11,7 @@ namespace Login
   // Função para login do médico
   void loginMedico(InMemoryDB& db);
 
-  // Função o menu login
+  // Função o fluxo do menu login
   void login(InMemoryDB& db);
 }
 

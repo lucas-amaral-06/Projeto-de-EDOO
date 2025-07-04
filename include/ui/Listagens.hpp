@@ -15,9 +15,6 @@ namespace ListagensUI {
 
   // @brief Itera sobre o banco de dados e exibe os detalhes dos recepcionistas.
   void listarRecepcionistas(const InMemoryDB& db);
-
-
-  void listarConsultasPorMedico(Medico* medico, const InMemoryDB& db);
 }
 
 

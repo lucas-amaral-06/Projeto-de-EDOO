@@ -3,8 +3,7 @@
 #include <iostream>
 using namespace std;
 
-Paciente::Paciente(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone)
-    : Pessoa(nome, cpf, dataNascimento, genero, telefone), prontuario(*this) // Inicializa o prontuário com o paciente
+Paciente::Paciente(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone): Pessoa(nome, cpf, dataNascimento, genero, telefone), prontuario(*this) // Inicializa o prontuário com o paciente
 {}
 
 const Prontuario& Paciente::getProntuario() const {

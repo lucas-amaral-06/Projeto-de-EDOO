@@ -7,7 +7,7 @@ using namespace std;
 
 class Medico;
 
-class DocumentoClinico
+class DocumentoClinico // CLASSE ABSTRATA que serve como base para outros documentos clínicos
 {
   private:
     string data;
@@ -18,6 +18,7 @@ class DocumentoClinico
 
     virtual ~DocumentoClinico();
 
+    // Método virtual puro para exibir o documento, deve ser implementado pelas classes derivadas
     virtual void exibir() const = 0;
 
     string getData() const;
@@ -34,6 +35,7 @@ class Evolucao : public DocumentoClinico
   public:
     Evolucao(const string& data, const Medico* medico, const string& descricao);
 
+    // Implementação do método exibir
     void exibir() const override;
 };
 
@@ -46,17 +48,20 @@ class Atestado : public DocumentoClinico
   public:
     Atestado(const string& data, const Medico* medico, const int& dias, const string& motivo);
 
+    // Implementação do método exibir
     void exibir() const override;
 };
 
 class Receita : public DocumentoClinico
 {
   private:
+    // Lista de medicamentos prescritos
     vector<string> medicamentos;
 
   public:
     Receita(const string& data, const Medico* medico, const vector<string>& medicamentos);
 
+    // Implementação do método exibir
     void exibir() const override;
 };
 

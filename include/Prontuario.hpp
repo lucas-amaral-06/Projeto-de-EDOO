@@ -28,18 +28,22 @@ class Prontuario
 
     ~Prontuario();
 
+    // Métodos para adicionar documentos ao prontuário
     void adicionarEvolucao(const Evolucao& evolucao);
     void adicionarReceita(const Receita& receita);
     void adicionarAtestado(const Atestado& atestado);
 
+    // getters para acessar os documentos
     void getReceitas(vector<Receita>& receitas) const;
     void getEvolucoes(vector<Evolucao>& evolucoes) const;
     void getAtestados(vector<Atestado>& atestados) const;
-
-    void exibirHistorico() const;
-    void exibirResumo() const;
-
     string getNumero() const;
+
+    // Métodos para exibir o prontuário
+    // Exibe o histórico completo de documentos do prontuário
+    void exibirHistorico() const;
+    // Exibe um resumo do prontuário, incluindo número, CPF do paciente, data de abertura e contagem de documentos
+    void exibirResumo() const;
 };
 
 #endif

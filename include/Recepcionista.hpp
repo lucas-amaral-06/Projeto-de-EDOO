@@ -12,14 +12,7 @@ class Recepcionista : public Pessoa
     string codigoAcesso;  // Código interno do recepcionista
 
   public:
-    Recepcionista(const string& nome, 
-                 const string& cpf, 
-                 const string& dataNascimento, 
-                 const string& genero, 
-                 const string& telefone,
-                 const string& senha,
-                 const string& turno,
-                 const string& codigoAcesso);
+    Recepcionista(const string& nome, const string& cpf, const string& dataNascimento, const string& genero, const string& telefone, const string& senha, const string& turno, const string& codigoAcesso);
 
     ~Recepcionista() override;
 

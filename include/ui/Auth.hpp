@@ -18,6 +18,7 @@ namespace Auth {
   // Função para registrar médicos, passamos a referência do vetor que atua como nosso DB inline para modificá-lo
   void registrarMedico(vector<unique_ptr<Medico>>& db);
 
+  // Função para registrar recepcionistas, passamos a referência do vetor que atua como nosso DB inline para modificá-lo
   void registrarRecepcionista(vector<Recepcionista>& db); 
 }
 

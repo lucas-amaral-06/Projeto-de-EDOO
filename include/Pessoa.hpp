@@ -19,6 +19,7 @@ class Pessoa
 
     virtual ~Pessoa();
 
+    // Getters
     string getNome() const;
     int getIdade() const;
     string getCPF() const;
@@ -26,10 +27,13 @@ class Pessoa
     string getGenero() const;
     string getTelefone() const;
 
+    // setters
     void setNome(const string& nome);
     void setIdade(const int& idade);
     void setTelefone(const string& telefone);
 
+    // Método para exibir todos os dados da pessoa
+    // Virtual para permitir sobrescrita em classes derivadas
     virtual void exibirDados() const;
 };
 
