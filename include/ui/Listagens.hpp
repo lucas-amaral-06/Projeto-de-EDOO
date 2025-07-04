@@ -4,6 +4,9 @@
 #include "db/InMemoryDB.hpp"
 
 namespace ListagensUI {
+  // Função do fluxo de listagem
+  void fluxoDeListagens(InMemoryDB &db);
+
   // @brief Itera sobre o banco de dados e exibe os detalhes dos médicos.
   void listarMedicos(const InMemoryDB& db);
 

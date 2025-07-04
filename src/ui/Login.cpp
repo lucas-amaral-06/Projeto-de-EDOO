@@ -8,7 +8,21 @@ using namespace std;
 
 namespace Login 
 {
-  // Função para login de recepcionista
+  void login(InMemoryDB& db){
+    int escolha = MenuUI::exibirMenuLogin(); 
+
+  switch (escolha) {
+    case 1:
+      Login::loginMedico(db);
+      break;
+    case 2:
+      Login::loginRecepcionista(db);
+      break;
+    case 3: // Voltar
+      break;
+  }
+  }
+
   void loginRecepcionista(InMemoryDB& db){
     while(true) {
       clearScreen();
@@ -86,7 +100,6 @@ namespace Login
   }
 }
 
-  // Função para login do médico
   void loginMedico(InMemoryDB& db){
     while(true) {
       clearScreen();

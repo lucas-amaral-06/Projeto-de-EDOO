@@ -4,11 +4,37 @@
 #include "Paciente.hpp"
 #include "Recepcionista.hpp"
 #include "Medico.hpp"
+#include "ui/Menu.hpp"
 
 using namespace std;
 
 namespace Auth
 {
+  void fluxoDeRegistro(InMemoryDB &db) {
+  int escolha = MenuUI::exibirMenuRegistro();
+
+  clearScreen();
+  MenuUI::exibirBanner();
+
+  switch (escolha) {
+    case 1: // Alterado para corresponder ao novo Menu.cpp (Recepcionista)
+      registrarRecepcionista(db.recepcionistasDB);
+      break;
+    case 2: // Alterado para corresponder ao novo Menu.cpp (Médico)
+      registrarMedico(db.medicosDB);
+      break;
+    case 3:
+      cout << "Retornando ao menu inicial..." << endl;
+      break;
+  }
+
+  if (escolha != 3) {
+    cout << "Pressione Enter para continuar... ";
+    cin.get();
+  }
+}
+
+
     // Função registrarPaciente com validações completas
     void registrarPaciente(vector<Paciente> &pacienteDB)
     {

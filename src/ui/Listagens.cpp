@@ -6,6 +6,26 @@
 using namespace std;
 
 namespace ListagensUI {
+  void fluxoDeListagens(InMemoryDB &db){
+    int escolha = MenuUI::exibirMenuListagens();
+
+  switch (escolha) {
+    case 1:
+      listarMedicos(db);
+      break;
+    case 2:
+      listarRecepcionistas(db);
+      break;
+    case 3:
+      break;
+  }
+
+  if (escolha != 3) {
+    cout << "Pressione Enter para continuar... ";
+    cin.get();
+  }
+  }
+
   void listarMedicos(const InMemoryDB& db) {
 
     clearScreen();
