@@ -77,25 +77,31 @@ void Agenda::exibir() const {
 }
 
 bool Agenda::adicionarConsulta(const std::string& diaSemana, const std::string& intervalo, std::unique_ptr<Consulta> novaConsulta) {
-	for (auto& dia : diasUteis) {
-		if (dia.getNomeDia() == diaSemana) {
-			for (auto& horario : dia.getHorarios()) {
-				if (horario.getIntervalo() == intervalo && horario.estaLivre()) {
-					Consulta* ptrConsulta = novaConsulta.get();
-					dia.adicionarConsulta(std::move(novaConsulta));
-					horario.marcarConsulta(ptrConsulta); // Marca o horário com a nova consulta
-					cout << "Consulta agendada para " << diaSemana << " no horário " << intervalo << ".\n";
-					return true;
-				} else {
-					cout << "Horário " << intervalo << " já está ocupado no dia " << diaSemana << ".\n";
-					return false;
-				}
-			}
-
-			cout << "ERRO: Horário " << intervalo << " inválido no dia " << diaSemana << ".\n";
-			return false;
-		}
-	}
-	std::cout << "ERRO: Dia " << diaSemana << " não inválido na agenda.\n";
-	return false;
+    for (auto& dia : diasUteis) {
+        if (dia.getNomeDia() == diaSemana) {
+            for (auto& horario : dia.getHorarios()) {
+                // Primeiro, verifica se o intervalo de horário corresponde
+                if (horario.getIntervalo() == intervalo) {
+                    // Se o horário for encontrado, verifica se está livre
+                    if (horario.estaLivre()) {
+                        Consulta* ptrConsulta = novaConsulta.get();
+                        dia.adicionarConsulta(std::move(novaConsulta));
+                        horario.marcarConsulta(ptrConsulta); // Marca o horário com a nova consulta
+                        cout << "Consulta agendada para " << diaSemana << " no horário " << intervalo << ".\n";
+                        return true;
+                    } else {
+                        // O horário foi encontrado, mas já está ocupado
+                        cout << "Horário " << intervalo << " já está ocupado no dia " << diaSemana << ".\n";
+                        return false;
+                    }
+                }
+            }
+            // Se o loop interno terminar, o horário não foi encontrado para o dia
+            cout << "ERRO: Horário " << intervalo << " inválido no dia " << diaSemana << ".\n";
+            return false;
+        }
+    }
+    // Se o loop externo terminar, o dia da semana não foi encontrado
+    std::cout << "ERRO: Dia " << diaSemana << " inválido na agenda.\n";
+    return false;
 }
