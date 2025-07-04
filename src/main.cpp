@@ -13,11 +13,8 @@ using namespace std;
 int main() {
   clearScreen();
   MenuUI::exibirBanner();
-
+  
   InMemoryDB db; // Inicializa o banco de dados em memória
-
-  cout << "\nPressione Enter para iniciar o sistema... ";
-  cin.get();
 
   bool executando = true;
   while (executando) {
