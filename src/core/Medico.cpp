@@ -35,6 +35,10 @@ Agenda& Medico::getAgenda() {
     return agenda;
 }
 
+const Agenda& Medico::getAgenda() const {
+    return agenda;
+}
+
 void Medico::setEspecialidade(const string& especialidade) {
     this->especialidade = especialidade;
 }

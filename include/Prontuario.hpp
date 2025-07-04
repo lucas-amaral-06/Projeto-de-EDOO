@@ -32,6 +32,10 @@ class Prontuario
     void adicionarReceita(const Receita& receita);
     void adicionarAtestado(const Atestado& atestado);
 
+    void getReceitas(vector<Receita>& receitas) const;
+    void getEvolucoes(vector<Evolucao>& evolucoes) const;
+    void getAtestados(vector<Atestado>& atestados) const;
+
     void exibirHistorico() const;
     void exibirResumo() const;
 

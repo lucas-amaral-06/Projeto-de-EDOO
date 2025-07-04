@@ -2,6 +2,8 @@
 #include "utils.hpp" 
 using namespace std;
 #include "ui/Menu.hpp"
+#include "ui/PortalMedico.hpp"
+
 
 namespace Login 
 {
@@ -130,7 +132,7 @@ namespace Login
           }
         // Verificar senha
           else if (senha == medicoLogin->getSenha()) {
-            MenuUI::exibirMenuMedico(medicoLogin->getNome());
+            PortalMedicoUI::fluxoMedico(*medicoLogin, db);
             return;
           } 
           else {

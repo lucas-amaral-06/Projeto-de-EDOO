@@ -30,6 +30,7 @@ public:
     std::string getEspecialidade() const;
     std::string getSenha() const;
     Agenda& getAgenda();
+    const Agenda& getAgenda() const;
 
     // Setters
     void setEspecialidade(const std::string& especialidade);
