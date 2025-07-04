@@ -261,4 +261,34 @@ namespace MenuUI {
             }
         }
     }
+
+    int exibirMenuRecepcionista(const string& nomeRecepcionista) {
+        int escolha = 0;
+
+        while (true) {
+            clearScreen();
+            exibirBanner();
+
+            cout << "\nBem-vindo(a), " << nomeRecepcionista << "!" << endl;
+            cout << "\n--- MENU RECEPCIONISTA ---\n\n";
+            cout << "1. Cadastrar Paciente" << endl;
+            cout << "2. Listar Pacientes" << endl;
+            cout << "3. Agendar Consulta" << endl;
+            cout << "4. Sair" << endl;
+            cout << "Sua escolha: ";
+
+            cin >> escolha;
+
+            if (cin.fail() || escolha < 1 || escolha > 4) {
+                cout << "\nERRO: Opção Inválida." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Pressione Enter para continuar... ";
+                cin.get();
+            } else {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return escolha;
+            }
+        }
+    }
 }

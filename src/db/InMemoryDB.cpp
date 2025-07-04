@@ -8,11 +8,11 @@ InMemoryDB::InMemoryDB() {
   cout << "\nInicializando banco de dados em memória...\n" << endl;
 
   // --- CRIANDO MÉDICOS ---
-  medicosDB.emplace_back("Ana Souza", "543.123.456-78", "20/02/1980", "Feminino", "(81) 97766-5544", "CRM/PE 12345", "Cardiologia", "souza123");
-  medicosDB.emplace_back("Carlos Silva", "123.456.789-00", "15/03/1975", "Masculino", "(11) 98888-7777", "CRM/SP 67890", "Pediatria", "silva123");
-  medicosDB.emplace_back("Fernanda Lima", "987.654.321-00", "10/04/1990", "Feminino", "(21) 99999-8888", "CRM/RJ 11223", "Neurologia", "lima123");
-  medicosDB.emplace_back("Roberto Costa", "321.654.987-00", "05/05/1985", "Masculino", "(31) 95555-4444", "CRM/MG 44556", "Ortopedia", "costa123");
-  medicosDB.emplace_back("Mariana Oliveira", "654.321.987-00", "30/06/1992", "Feminino", "(41) 92222-3333", "CRM/PR 77889", "Ginecologia", "oliveira123");
+  medicosDB.emplace_back(std::make_unique<Medico>("Ana Souza", "543.123.456-78", "20/02/1980", "Feminino", "(81) 97766-5544", "CRM/PE 12345", "Cardiologia", "souza123"));
+  medicosDB.emplace_back(std::make_unique<Medico>("Carlos Silva", "123.456.789-00", "15/03/1975", "Masculino", "(11) 98888-7777", "CRM/SP 67890", "Pediatria", "silva123"));
+  medicosDB.emplace_back(std::make_unique<Medico>("Fernanda Lima", "987.654.321-00", "10/04/1990", "Feminino", "(21) 99999-8888", "CRM/RJ 11223", "Neurologia", "lima123"));
+  medicosDB.emplace_back(std::make_unique<Medico>("Roberto Costa", "321.654.987-00", "05/05/1985", "Masculino", "(31) 95555-4444", "CRM/MG 44556", "Ortopedia", "costa123"));
+  medicosDB.emplace_back(std::make_unique<Medico>("Mariana Oliveira", "654.321.987-00", "30/06/1992", "Feminino", "(41) 92222-3333", "CRM/PR 77889", "Ginecologia", "oliveira123"));
 
   cout << "Médicos criados com sucesso!" << endl;
 
@@ -72,8 +72,8 @@ Paciente* InMemoryDB::buscarPacientePorCPF(const string& cpf) {
 
 Medico* InMemoryDB::buscarMedicoPorCRM(const string& crm) {
   for (auto& medico : this->medicosDB) {
-    if (medico.getCRM() == crm) {
-      return &medico;
+    if (medico->getCRM() == crm) {
+      return medico.get();
     }
   }
   return nullptr; // Retorna nullptr se não encontrar o médico

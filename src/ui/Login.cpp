@@ -3,6 +3,7 @@
 using namespace std;
 #include "ui/Menu.hpp"
 #include "ui/PortalMedico.hpp"
+#include "ui/PortalRecepcionista.hpp"
 
 
 namespace Login 
@@ -66,11 +67,7 @@ namespace Login
 
           // Se for o código de acesso correto
           if(codigoAcesso == recepcionistaLogin->getCodigoAcesso()) {
-            cout << "\nLogin realizado com sucesso! Bem-vindo(a), " 
-            << recepcionistaLogin->getNome() << "!\n";
-            // Futuramente, aqui entrará o menu do recepcionista
-            cout << "Pressione Enter para continuar...";
-            cin.get();
+            PortalRecepcionistaUI::fluxoRecepcionista(*recepcionistaLogin, db);
             return;
           } else {
             cout << "\nERRO: Código de acesso incorreto.\n";
