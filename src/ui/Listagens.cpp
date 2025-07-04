@@ -42,5 +42,4 @@ namespace ListagensUI {
           cout << "\n\n\n";
       }
   }
-      
 }

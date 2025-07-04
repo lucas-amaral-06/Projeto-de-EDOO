@@ -6,170 +6,9 @@
 #include "ui/Listagens.hpp"
 #include "db/InMemoryDB.hpp"
 #include "utils.hpp" 
+#include "ui/Login.hpp"
 
 using namespace std;
-
-// --- FUNÇÕES DE MENU ---
-
-//Função para menu de médico
-void menuMédico(Medico* medico) {
-  
-}
-
-// --- FUNÇÕES DE LOGIN (LÓGICA COMBINADA) ---
-
-// Função para login de recepcionista (vinda da versão do GitHub)
-void loginRecepcionista(InMemoryDB& db) {
-  while(true) {
-    clearScreen();
-    MenuUI::exibirBanner();
-    cout << "\n--- LOGIN RECEPCIONISTA ---\n\n";
-    
-    cout << "Digite seu CPF (XXX.XXX.XXX-XX) ou '0' para voltar: ";
-    string cpf;
-    getline(cin, cpf);
-
-    // Opção para sair
-    if (cpf == "0") {
-        return;
-
-    }
-
-    //Caso não respeite o formato do CPF, pede novamente
-    else if (!(validarCPF(cpf))){
-      cout << "\nERRO: Por favor, respeite o formato do CPF." << endl;
-      cout << "Pressione Enter para continuar... ";
-      cin.clear();
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    } 
-    
-    //Caso respeite o formato do CPF, verificamos se ele está cadastrado
-    else {
-      
-      Recepcionista* recepcionistaLogin = db.buscarRecepcionistaPorCPF(cpf);
-      
-      if(!recepcionistaLogin) {
-          cout << "\nERRO: Recepcionista com CPF " << cpf << " não cadastrado.\n";
-          cout << "Pressione Enter para continuar... ";
-          cin.clear();
-          cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      } 
-      
-      // Se está cadastrado
-      else {
-
-        // Solicitar senha
-        cout << "Digite sua senha ou '0' para voltar: ";
-        string senha;
-        getline(cin, senha);
-
-        // Verificar se o usuário quer voltar
-        if (senha == "0"){
-          return;
-        }
-
-        // Se for a senha correta
-        else if (senha == recepcionistaLogin->getSenha()) {
-          
-          // Verifica o código de acesso
-
-          cout << "Digite seu código de acesso ou '0' para voltar: ";
-          string codigoAcesso;
-          getline(cin, codigoAcesso);
-
-          // Verificar se o usuário quer voltar
-
-          if (codigoAcesso == "0"){
-            return;
-          }
-
-          // Se for o código de acesso correto
-
-          if(codigoAcesso == recepcionistaLogin->getCodigoAcesso()) {
-
-            cout << "\nLogin realizado com sucesso! Bem-vindo(a), " 
-                  << recepcionistaLogin->getNome() << "!\n";
-            
-            // Futuramente, aqui entrará o menu do recepcionista
-            cout << "Pressione Enter para continuar...";
-            cin.get();
-            return;
-          } else {
-              cout << "\nERRO: Código de acesso incorreto.\n";
-              cout << "Pressione Enter para tentar novamente..s.";
-              cin.clear();
-              cin.ignore(numeric_limits<streamsize>::max(), '\n');
-          }
-                      
-        } else {
-            cout << "\nERRO: Senha incorreta.\n";
-            cout << "Pressione Enter para tentar novamente... ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-      }
-    }
-  }
-}
-
-// Função para login do médico
-void loginMedico(InMemoryDB& db) {
-  while(true) {
-    clearScreen();
-    MenuUI::exibirBanner();
-    cout << "\n--- LOGIN MÉDICO ---\n\n";
-    
-    cout << "Digite seu CRM (CRM/XX XXXXX) ou '0' para voltar: ";
-    string crm;
-    getline(cin, crm);
-
-    // Opção para sair
-    if (crm == "0") {
-      return;
-    }
-    // Validação do formato do CRM
-    else if (!validarCRM(crm)) {
-      cout << "\nERRO: Por favor, respeite o formato do CRM (CRM/XX XXXXX)." << endl;
-      cout << "Pressione Enter para continuar... ";
-      cin.get();
-    } 
-    // Verificação se está cadastrado
-    else {
-      Medico* medicoLogin = db.buscarMedicoPorCRM(crm);
-      
-      if(!medicoLogin) {
-          cout << "\nERRO: Médico com CRM " << crm << " não cadastrado.\n";
-          cout << "Pressione Enter para continuar... ";
-          cin.get();
-      } 
-      // Se está cadastrado
-      else {
-        // Solicitar senha
-        cout << "Digite sua senha ou '0' para voltar: ";
-        string senha;
-        getline(cin, senha);
-
-        // Verificar se o usuário quer voltar
-        if (senha == "0") {
-            return;
-        }
-        // Verificar senha
-        else if (senha == medicoLogin->getSenha()) {
-          
-          menuMédico(medicoLogin);
-
-          return;
-        } 
-        else {
-          cout << "\nERRO: Senha incorreta.\n";
-          cout << "Pressione Enter para tentar novamente... ";
-          cin.get();
-        }
-      }
-    }
-  }
-}
-
 // Menu principal de Login (lógica do GitHub)
 void login(InMemoryDB& db) {
   // Nota: Esta função depende da criação de 'exibirMenuLogin' em Menu.cpp
@@ -177,10 +16,10 @@ void login(InMemoryDB& db) {
 
   switch (escolha) {
       case 1:
-          loginMedico(db);
+          Login::loginMedico(db);
           break;
       case 2:
-          loginRecepcionista(db);
+          Login::loginRecepcionista(db);
           break;
       case 3: // Voltar
           break;
@@ -240,8 +79,6 @@ void fluxoDeRegistro(InMemoryDB &db) {
 int main() {
     clearScreen();
     MenuUI::exibirBanner();
-    // Você precisará adicionar o comando para corrigir a acentuação aqui
-    // Ex: SetConsoleOutputCP(CP_UTF8); no Windows
 
     InMemoryDB db; // Inicializa o banco de dados em memória
 
