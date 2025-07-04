@@ -1,5 +1,4 @@
 #include "ui/Menu.hpp"
-#include "Medico.hpp"
 
 namespace MenuUI {
     void exibirBanner(){
@@ -200,6 +199,66 @@ namespace MenuUI {
 
             cout << "Pressione Enter para continuar... ";
             cin.get();
+        }
+    }
+
+    int exibirMenuMedico(const string& nomeMedico) {
+        int escolha = 0;
+
+        while (true) {
+            clearScreen();
+            exibirBanner();
+            
+            cout << "\nBem-vindo(a), " << nomeMedico <<"!" << endl;
+            cout << "\n--- MENU MÉDICO ---\n\n";
+            cout << "1. Meus Agendamentos" << endl;
+            cout << "2. Acessar Prontuário de Paciente" << endl;
+            cout << "3. Registrar Novo Documento" << endl;
+            cout << "4. Sair\n\n";
+            cout << "Sua escolha: ";
+
+            cin >> escolha;
+
+            if (cin.fail() || escolha < 1 || escolha > 4) {
+                cout << "\nERRO: Opção Inválida." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Pressione Enter para continuar... ";
+                cin.get();
+            } else {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return escolha;
+            }
+        }
+    }
+
+    int exibirMenuCriarDocumento() {
+        int escolha = 0;
+        
+        while (true) {
+            clearScreen();
+            exibirBanner();
+            
+            cout << "\n--- MENU DE CRIAÇÃO DE DOCUMENTOS ---\n\n";
+            cout << "Qual tipo de documento deseja criar?" << endl;
+            cout << "1. Evolução Clínica" << endl;
+            cout << "2. Receita Médica" << endl;
+            cout << "3. Atestado Médico" << endl;
+            cout << "4. Voltar ao menu anterior\n\n";
+            cout << "Sua escolha: ";
+
+            cin >> escolha;
+
+            if (cin.fail() || escolha < 1 || escolha > 4) {
+                cout << "\nERRO: Opção Inválida." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Pressione Enter para continuar... ";
+                cin.get();
+            } else {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return escolha;
+            }
         }
     }
 }

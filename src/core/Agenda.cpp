@@ -66,5 +66,15 @@ const std::array<Agenda::Dia, 5>& Agenda::getDiasUteis() const {
 
 // Você pode adicionar a lógica de exibição aqui depois
 void Agenda::exibir() const {
-    cout << "Exibindo a agenda..." << endl;
+    for (const auto& dia : diasUteis) {
+        std::cout << "Agenda para " << dia.getNomeDia() << ":\n";
+        for (const auto& horario : dia.getHorarios()) {
+            std::cout << "  " << horario.getIntervalo();
+            if (horario.estaLivre()) {
+                std::cout << " - Livre\n";
+            } else {
+                std::cout << " - Ocupado\n";
+            }
+        }
+    }
 }
