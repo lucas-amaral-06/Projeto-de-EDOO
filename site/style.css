@@ -1,0 +1,272 @@
+/* --- Reset Básico e Estilos Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa; /* Cinza bem claro */
+    color: #212529; /* Preto suave */
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4 {
+    line-height: 1.2;
+    color: #343a40; /* Cinza escuro */
+}
+
+section {
+    padding: 3rem 0;
+}
+
+/* --- Cabeçalho --- */
+.main-header {
+    background-color: #ffffff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #343a40;
+}
+
+.github-btn {
+    background-color: #9e0dff;
+    color: #ffffff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.github-btn:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+}
+
+/* --- Seção Hero --- */
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: #6c757d; /* Cinza médio */
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+/* --- Cards e Seções de Conteúdo --- */
+.card {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.about-section h2, .video-section h2, .authors-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #343a40;
+}
+
+.about-description {
+    text-align: center;
+    max-width: 56rem;
+    margin: 0 auto 3rem auto;
+    color: #495057;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.feature-column h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 0.5rem;
+}
+
+.features-list {
+    list-style: "✓ ";
+    padding-left: 1.5rem;
+    color: #495057;
+}
+
+.features-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Seção de Vídeo --- */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 56rem;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* --- Seção de Autores --- */
+.authors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.author-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.author-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.author-card img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    border: 3px solid #e9ecef;
+}
+
+.author-card h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.author-card a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.author-card a:hover {
+    text-decoration: underline;
+}
+
+.author-card .github-unavailable {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* --- Rodapé --- */
+.main-footer {
+    background-color: #e9ecef;
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid #dee2e6;
+}
+
+.main-footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.main-footer p {
+    color: #495057;
+}
+
+
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    .authors-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .main-footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.footer_p{
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    .github-btn {
+        display: none;
+    }
+    .authors-grid {
+        grid-template-columns: 1fr;
+    }
+}

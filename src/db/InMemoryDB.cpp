@@ -28,7 +28,7 @@ InMemoryDB::InMemoryDB() {
   pacientesDB.emplace_back("Maria Santos", "234.567.890-11", "02/02/1992", "Feminino", "(21) 97654-3210");
   pacientesDB.emplace_back("Pedro Almeida", "345.678.901-22", "03/03/1988", "Masculino", "(31) 96543-2109");
   pacientesDB.emplace_back("Ana Pereira", "456.789.012-33", "04/04/1995", "Feminino", "(41) 95432-1098");
-  pacientesDB.emplace_back("Lucas Costa", "567.890.123-44", "05/05/1987", "Masculino", "(51) 94321-0987");
+  pacientesDB.emplace_back("Lucas Costa", "567.890.123-44", "05/05/1987", "Masculino", "(51) 94321-0987", "senha123");
 
   cout << "Pacientes criados com sucesso!" << endl;
 
